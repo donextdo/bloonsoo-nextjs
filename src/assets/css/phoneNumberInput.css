@@ -1,0 +1,62 @@
+.m-phone-number-input__country-flag{
+   left: 1rem !important;
+   top: 14px !important;
+   bottom: 0 !important;
+   height: max-content !important;
+}
+
+.m-input.--should-up .m-input-label {
+    display: none;
+}
+
+.m-input.--has-label .m-input-input {
+    padding-top: 0 !important;
+}
+
+
+.m-phone-number-input__select .m-input-wrapper {
+    border-radius: 0 !important;
+    width: 7rem;
+    border: 1px solid !important;
+    border-color: rgb(148 163 184) !important;
+}
+
+/* .m-phone-number-input__input .m-input-wrapper {
+    border-radius: 0 !important;
+    border: 1px solid !important;
+    border-color: rgb(148 163 184) !important;
+} */
+
+.m-phone-number-input__select {
+    width: 7rem !important;
+}
+
+.m-input-wrapper.--default-border {
+    border-color: rgb(148 163 184) !important;
+}
+
+.maz-border {
+    border-width: 1px;
+}
+
+.maz-rounded-lg {
+    border-radius: 0;
+}
+
+.m-phone-number-input {
+    height: max-content !important;
+    width: 100% !important;
+}
+
+.m-phone-number-input__input.--border-radius .m-input-wrapper {
+    border-radius: 0;
+    /* border: 1px solid; */
+    border-width: 1px;
+}
+
+
+/* m-input-wrapper --default-border maz-rounded
+
+m-input --has-label m-phone-number-input__input maz-flex-1 --border-radius --error --focused --primary --sm */
+
+/* m-input --is-focused --should-up --has-label m-phone-number-input__input maz-flex-1 --border-radius --error --focused --primary --sm */
