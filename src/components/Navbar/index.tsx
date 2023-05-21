@@ -66,9 +66,10 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
             </div>
 
             <div v-if="!user" className="flex gap-2 text-white font-semibold">
-                <Link className="px-6 py-2 gradient-outline-btn" href='/'>Login</Link>
+            <Link className="px-6 py-2 gradient-outline-btn" href='/'>Login</Link>
 
-                <Link className="px-6 py-2 gradient-outline-btn" href='/'>Register</Link>
+            <Link className="px-6 py-2 gradient-outline-btn" href='/'>Register</Link>
+            
             </div>
 
             </div>
