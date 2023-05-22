@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { Children, FC, ReactNode } from 'react';
 import Card from './Card';
 import Image from 'next/image';
 
@@ -7,18 +7,19 @@ interface CtaProps {
   contents: {
     title: string;
     desc: string;
-    image: string;
+    buttonLink: string;
+    buttonText: string;
   };
   noCard?: boolean;
   children?: ReactNode;
 
 }
 
-const Cta: FC<CtaProps> = ({ contents, noCard }) => {
+const Cta: FC<CtaProps> = ({ contents, noCard , children}) => {
   return (
     <section className="relative w-full h-70vh">
-      <Image src={contents.image} loading="lazy" className="w-full h-full object-cover" width={500} height={500} alt=""/>
-      {!noCard && (
+      {children}
+        {!noCard && (
         <Card image={contents}>
         </Card>
       )}

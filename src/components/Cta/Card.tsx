@@ -1,10 +1,12 @@
+import Link from 'next/link';
 import { FC, ReactNode } from 'react';
 
 interface CardProps {
   image: {
     title: string;
     desc: string;
-    button?: ReactNode;
+    buttonLink: string;
+    buttonText: string;
 
   };
   noCard?: boolean;
@@ -19,7 +21,13 @@ const Card: FC<CardProps> = ({ image, noCard, children }) => {
         <h1 className="text-xl md:text-4xl font-bold leading-10 mb-4 max-w-xs">{image.title}</h1>
         <p className="text-sm md:text-base font-normal leading-7 max-w-sm">{image.desc}</p>
       </div>
-      {image.button}
+      <Link href={image.buttonLink} 
+      className="py-3 px-5 md:py-4 md:px-10 inline-block rounded-full 
+                w-max text-sm text-black 
+                font-bold bg-gradient-to-b 
+                from-darkyellow to-semidarkyellow 
+                hover:from-semidarkyellow 
+                hover:to-darkyellow">{image.buttonText}</Link>
     </div>
   );
 };
