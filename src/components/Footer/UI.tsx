@@ -11,10 +11,10 @@ interface UIProps {
 const UI: React.FC<UIProps> = ({ data }) => {
   return (
     <ul className="text-sm font-normal flex flex-col gap-3">
-      {data.map((link) => (
-        <li key={link.title}>
-          <Link href={link.path}>
-            {link.title}
+      {data.map((data) => (
+        <li key={data.title}>
+          <Link href={data.path}>
+            {data.title}
           </Link>
         </li>
       ))}

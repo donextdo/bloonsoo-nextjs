@@ -46,10 +46,10 @@ export default function Home() {
   return (
     <div>
 
-      <Hotels/>
+      <Hotels title=''/>
       <WhyChooseUs/>
 
-      
+      <Hotels title='Top Rated Properties' topRated/>
 
       <Cta contents={cta1}>
       <Image src={Img1} loading="lazy" className="w-full h-full object-cover" alt="" />
