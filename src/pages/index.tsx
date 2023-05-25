@@ -11,6 +11,7 @@ import Img1 from '../assets/cta/cta_image1.jpg'
 import Img2 from '../assets/cta/cta_image2.jpg'
 import Img3 from '../assets/cta/cta_image3.jpg'
 import Hotels from '@/components/Hotels'
+import MyComponent from '@/components/Featured'
 
 
 
@@ -61,6 +62,8 @@ export default function Home() {
                 hover:from-semidarkyellow 
                 hover:to-darkyellow">{cta1.buttonText}</Link>
     </Cta>
+
+    <MyComponent/>
 
     <Cta contents={cta2}>
       <Image src={Img2} loading="lazy" className="w-full h-full object-cover" alt="" />
