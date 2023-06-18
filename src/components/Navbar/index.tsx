@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Logo from '../../assets/logo.png'
 import Flats from './icons/Flats'
 import Room from './icons/Room'
@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouseChimney, faHotel  } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router'
 
 
 
@@ -18,11 +19,39 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ short }) => {
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const router= useRouter()
+
+  let user: any
+
+    useEffect(() => {
+        if (typeof localStorage !== 'undefined') {
+            const userJson = localStorage.getItem('user');
+             user = userJson ? JSON.parse(userJson) : null;
+        }
+        if (user) {
+          setIsLoggedIn(true);
+        }
+      }, []);
+
+
   const containerClasses = classNames('relative', 'mx-auto', 'flex', 'flex-col', 'justify-center', 'sm:container', 'px-20', {
     'h-32': short,
     'h-44': !short,
   });
 
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    router.push('/')
+
+    setTimeout(() => {
+        window.location.reload();
+      }, 1000); 
+    
+
+  }
+  
   return (
     <nav className='py-8 bg-darkblue text-white font-montserrat'>
         <div className='px-4 flex items-center justify-between relative md:px-2 md:container md:mx-auto'>
@@ -33,7 +62,10 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
           <div className="flex gap-5">
 
             <div className="flex gap-2">
-                <Link v-if="user" href='/' className="py-2 px-3 md:py-2 md:px-6 rounded-full gradient-btn">Become A Host</Link>
+                {isLoggedIn ? (
+                <Link href='/listing' className="py-2 px-3 md:py-2 md:px-6 rounded-full gradient-btn">Become A Host</Link>
+
+                ): null}
 
                 {/* <button 
                 @click="toggleMenu"
@@ -64,13 +96,19 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
                     </div>
                 </button> */}
             </div>
-
-            <div v-if="!user" className="flex gap-2 text-white font-semibold">
-            <Link className="px-6 py-2 gradient-outline-btn" href='/'>Login</Link>
-
-            <Link className="px-6 py-2 gradient-outline-btn" href='/'>Register</Link>
             
-            </div>
+            {isLoggedIn ? (
+                <button className='btn-accent py-2 px-6' onClick={handleLogout}>Logout</button>
+            ) :(
+                <div  className="flex gap-2 text-white font-semibold">
+                <Link className="px-6 py-2 gradient-outline-btn" href='/signin'>Login</Link>
+    
+                <Link className="px-6 py-2 gradient-outline-btn" href='/register'>Register</Link>
+                
+                </div>
+            )}
+
+            
 
             </div>
         </div>

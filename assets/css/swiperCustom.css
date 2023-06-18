@@ -1,0 +1,21 @@
+.swiper-pagination-bullet {
+    width: .8rem;
+    height: .8rem;
+    background-color: white;
+    opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #006EB3;
+}
+
+.swiper-horizontal>.swiper-pagination-bullets, 
+.swiper-pagination-bullets.swiper-pagination-horizontal, 
+.swiper-pagination-custom, 
+.swiper-pagination-fraction {
+    bottom: 12px;
+    left: auto;
+    width: max-content;
+    right: 10px;
+    z-index: 99;
+}
