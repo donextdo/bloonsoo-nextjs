@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import baseUrl from "../../../Utils/baseUrl";
 import { useEffect, useState } from "react";
+import Card from "@/components/Booking/Card";
+import ProfileCard from "@/components/Profile/ProfileCard";
 
 const ReservationPage = () => {
     const [menu, setMenu] = useState(false);
@@ -56,7 +58,7 @@ const ReservationPage = () => {
             <section className="text-black font-montserrat md:container mx-auto px-5 md:px-2 flex flex-col gap-14 py-10">
                 <main className="md:grid grid-cols-4 items-start gap-12 w-full">
                     <aside className="w-full col-span-1 h-full mb-10 md:mb-0">
-                        {/* <ProfileCard /> */}
+                        <ProfileCard />
                     </aside>
 
                     <section className="w-full col-span-3 flex flex-col relative">
@@ -65,9 +67,9 @@ const ReservationPage = () => {
                         </div>
 
                         <div className="mt-6 flex flex-col gap-4 w-full">
-                            {bookings.map((book) => (
-                                //   <BookingCard key={book._id} booking={book} />
-                                <div>hi</div>
+                            {bookings.map((book: any) => (
+                                <Card key={book._id} booking={book} />
+
                             ))}
                         </div>
 
@@ -103,10 +105,10 @@ const ReservationPage = () => {
                                 </li>
 
                                 {user && (
-                                    <button onClick={logout} className="btn-accent py-2">
-                                        Logout
-                                    </button>
-                                )}
+                                <button onClick={logout} className="btn-accent py-2">
+                                    Logout
+                                </button>
+                                  )} 
                             </ul>
                         </div>
                     </section>

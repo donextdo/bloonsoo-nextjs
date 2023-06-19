@@ -48,6 +48,8 @@ const ReservePopup = ({ room, setShowReservePopup }: any) => {
     const handleGuestClick = () => {
         setGuestPanel(!guestPanel);
         setSetGuests(true);
+        
+
     };
 
     const handleIncrease = (e: any) => {
@@ -111,6 +113,8 @@ const ReservePopup = ({ room, setShowReservePopup }: any) => {
         };
 
         dispatch(addBooking(bookingObj))
+        setShowReservePopup(false)
+
         // Handle form submission with the payload
     };
 

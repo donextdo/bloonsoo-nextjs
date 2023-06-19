@@ -32,7 +32,7 @@ const BookinCard = ({booking}:any) => {
           </div>
   
           <span className={`text-xs h-max font-medium w-max text-blask tracking-wider py-[2px] px-3 rounded-md ${getColor(booking?.status)}`}>
-            {BookingStatus[booking?.status]}
+          {booking?.status === 0 ? 'Pending' : booking?.status === 1 ? 'Approved' : 'Cancelled'}
           </span>
   
           <h3 className="text-sm md:text-lg font-bold ml-auto">Total Price: {booking.total}</h3>

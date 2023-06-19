@@ -198,7 +198,7 @@ const BookingFinalPage = () => {
               }
 
         
-        // router.push('/profile/reservations');
+        router.push('/profile/reservations');
 
         // if (paymentOption === 'card') {
         //   toggleCheckOutPopup();
