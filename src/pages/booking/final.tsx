@@ -111,8 +111,6 @@ const BookingFinalPage = () => {
         }
       
 
-      console.log(user._id)
-
     useEffect(() => {
         fetchData();
     }, [hotelId]);

@@ -4,12 +4,36 @@ import baseUrl from "../../../Utils/baseUrl";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "next/router";
 
 const ProfileCrad = ({onEditClick, editMode}:any) => {
     const [image, setImage] = useState(null);
     const [imageValue, setImageValue] = useState("");
     const [preview, setPreview] = useState('');
-
+    const [oneUser, setOneUser] = useState({
+        about: "",
+        address: {
+            addressLine1: '',
+            addressLine2: '',
+            city: '',
+            country: '',
+            postalCode: '',
+        },
+        email: '',
+        firstName: '',
+        isEmailVerified: false,
+        isMobileVerified: false,
+        isProfileComplete: false,
+        lastName: '',
+        mobile: '',
+        password: '',
+        profilePic: '',
+        role: '',
+        status: '',
+        username: '',
+        _id: '',
+    })
+    const router = useRouter ()
     let token: any;
     if (typeof localStorage !== "undefined") {
         token = localStorage.getItem("token");
@@ -23,6 +47,26 @@ const ProfileCrad = ({onEditClick, editMode}:any) => {
              user = userJson ? JSON.parse(userJson) : null;
         }  
 
+
+        
+    useEffect(() => {
+        fetchData()
+    }, []);
+
+    async function fetchData() {
+        try {
+            const res = await axios.get(`${baseUrl}/user/${user._id}`, {
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
+            });
+            console.log(res.data)
+            const data = res.data;
+            setOneUser(data)
+        } catch (err) {
+            console.log(err);
+        }
+    }
     const onChange = async (event: any) => {
         const input = event.target;
         if (input.files) {
@@ -48,6 +92,7 @@ const ProfileCrad = ({onEditClick, editMode}:any) => {
                 console.log(hotel);
 
                 setPreview(hotel.profilePic);
+                router.reload()
                 // authStore.setUser(response.data);
             } catch (error) {
                 console.error("Error updating profile picture:", error);
@@ -62,16 +107,16 @@ const ProfileCrad = ({onEditClick, editMode}:any) => {
     //     fullName = user.username;
     // }
 
-    let fullName = user ? `${user.firstName} ${user.lastName}` : "";
-    let InitilName = user ? `${user?.firstName[0]} ${user?.lastName[0]}` : ""
+    let fullName = oneUser ? `${oneUser.firstName} ${oneUser.lastName}` : "";
+    let InitilName = oneUser ? `${oneUser?.firstName[0]} ${oneUser?.lastName[0]}` : ""
 
     return (
         <div className="shadow-md rounded-lg bg-white w-full px-6 py-6 flex flex-col gap-2">
             <div className="w-full pb-6 border-b border-gray-300">
                 <div className="w-3/5 md:w-2/3 aspect-square rounded-full mx-auto overflow-hidden relative group mb-4 md:mb-0">
-                    {user?.profilePic ? (
+                    {oneUser?.profilePic ? (
                         <img
-                            src={user.profilePic}
+                            src={oneUser.profilePic}
                             className="w-full h-full object-cover"
                             alt=""
                         />
@@ -108,18 +153,18 @@ const ProfileCrad = ({onEditClick, editMode}:any) => {
                 </h1>
 
                 <div className="w-full flex flex-col items-center">
-                    {user?.address && (
+                    {oneUser?.address && (
                         <div className="w-max flex items-center gap-2">
                             <i className="fas fa-location-dot text-blue-600 text-base"></i>
                             <p className="text-sm font-semibold text-gray-600">
-                                {user.address.city}
+                                {oneUser.address.city}
                             </p>
                         </div>
                     )}
 
                     <div className="w-max flex items-center gap-2">
                         <i className="fas fa-envelope text-blue-600 text-base"></i>
-                        <p className="text-sm font-semibold text-gray-600">{user?.email}</p>
+                        <p className="text-sm font-semibold text-gray-600">{oneUser?.email}</p>
                     </div>
                 </div>
             </div>

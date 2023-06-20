@@ -158,7 +158,7 @@ const SignIn = () => {
                         </Link>
 
                         <p className="text-sm text-gray-700 font-medium -mt-4">
-                            Don't have an account? <Link href="/register" className="text-[#3A1C61]">Sing Up</Link>
+                            Don&apos;t have an account? <Link href="/register" className="text-[#3A1C61]">Sing Up</Link>
                         </p>
                     </div>
                 </div>

@@ -18,7 +18,7 @@ import LoginPopup from "@/components/Auth/LoginPopup/LoginPopup";
 
 // import { storeToRefs } from "pinia";
 
-const hotelPages = () => {
+const HotelPages = () => {
     const [hotelGallery, setHotelgallery] = useState([])
     const [showGallery, setShowGallery] = useState(false)
     const [showBookingDetails, setShowBookingDetails] = useState(false)
@@ -167,4 +167,4 @@ const hotelPages = () => {
     );
 }
 
-export default hotelPages;
+export default HotelPages;

@@ -40,7 +40,7 @@ const SearchPage = () => {
         <section className="md:container mx-auto px-10 py-12 flex flex-col items-center gap-10 text-black font-montserrat">
             <main className=" w-full md:px-32">
                 <section className="flex flex-col gap-6 relative">
-                    <h1 className="font-bold text-lg md:text-3xl mb-10">{hotels.length} Results Found for "{city}"</h1>
+                    <h1 className="font-bold text-lg md:text-3xl mb-10">{hotels.length} Results Found for &quot;{city}&quot;</h1>
 
                     {hotels.map((hotel:any, index:number) => (
                         <HotelCard key={index} hotel={hotel} />

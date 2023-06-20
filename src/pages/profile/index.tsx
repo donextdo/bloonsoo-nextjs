@@ -3,9 +3,35 @@ import { faBars, faCaretDown, faPenToSquare, faTimes } from "@fortawesome/free-s
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import baseUrl from "../../../Utils/baseUrl";
 import ProfileCard from "@/components/Profile/ProfileCard";
+import axios from "axios";
+
+interface UserData {
+    address: {
+        addressLine1: string;
+        addressLine2: string;
+        city: string;
+        country: string;
+        postalCode: string;
+    };
+    createdAt: string;
+    email: string;
+    firstName: string;
+    isEmailVerified: boolean;
+    isMobileVerified: boolean;
+    isProfileComplete: boolean;
+    lastName: string;
+    mobile: string;
+    password: string;
+    profilePic: string;
+    role: string;
+    status: string;
+    updatedAt: string;
+    username: string;
+    _id: string;
+}
 
 const ProfilePage = () => {
     const [menu, setMenu] = useState(false);
@@ -30,6 +56,29 @@ const ProfilePage = () => {
     const [about, setAbout] = useState("");
     const [aboutError, setAboutError] = useState(false);
     const [code, setCode] = useState(42);
+    const [oneUser, setOneUser] = useState({
+        about: "",
+        address: {
+            addressLine1: '',
+            addressLine2: '',
+            city: '',
+            country: '',
+            postalCode: '',
+        },
+        email: '',
+        firstName: '',
+        isEmailVerified: false,
+        isMobileVerified: false,
+        isProfileComplete: false,
+        lastName: '',
+        mobile: '',
+        password: '',
+        profilePic: '',
+        role: '',
+        status: '',
+        username: '',
+        _id: '',
+    })
 
 
     const options = [13, 23, 42, 33, 5, 56, 64];
@@ -47,6 +96,35 @@ const ProfilePage = () => {
     if (typeof localStorage !== 'undefined') {
         const userJson = localStorage.getItem('user');
         user = userJson ? JSON.parse(userJson) : null;
+    }
+
+
+    useEffect(() => {
+        fetchData()
+    }, []);
+
+    async function fetchData() {
+        try {
+            const res = await axios.get(`${baseUrl}/user/${user._id}`, {
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
+            });
+            console.log(res.data)
+            const data = res.data;
+            setOneUser(data)
+            setFirstName(data.firstName);
+            setLastName(data.lastName);
+            setAddressLine1(data.address.addressLine1);
+            setAddressLine2(data.address.addressLine2);
+            setCity(data.address.city)
+            setCountry(data.address.country)
+            setPostalCode(data.address.postalCode)
+            setPhoneNumber(data.mobile)
+            setAbout(data.about);
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     const logout = () => {
@@ -147,7 +225,7 @@ const ProfilePage = () => {
                         </div>
 
                         <p className="text-sm font-semibold text-red-800"
-                          hidden={!user?.isProfileComplete}
+                            hidden={!user?.isProfileComplete}
                         >
                             *Please complete your profile
                         </p>
@@ -251,7 +329,7 @@ const ProfilePage = () => {
                                 htmlFor="country"
                                 className="text-gray-600 text-sm font-semibold"
                             >
-                                Country or Region"
+                                Country or Region&quot;
                             </label>
                             <input
                                 className="w-full px-6 py-2 border border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none"

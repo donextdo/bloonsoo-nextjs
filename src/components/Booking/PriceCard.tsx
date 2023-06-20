@@ -20,7 +20,7 @@ const PriceCard = () => {
         <div className="border-b-2 border-gray-200 pb-6 mb-5">
             <div className="flex items-center justify-between">
                 <div>
-                    <p className="font-medium text-sm md:text-base">Property's Currency</p>
+                    <p className="font-medium text-sm md:text-base">Property&apos;s Currency</p>
                         
                 </div>
 
@@ -34,7 +34,7 @@ const PriceCard = () => {
 
         </div>
 
-        <p className="text-gray-500 mb-4 text-sm md:text-base">*This price is converted to show you the approximate cost in LKR. You'll pay in USS or LKR. The exchange rate might change before you pay. </p>
+        <p className="text-gray-500 mb-4 text-sm md:text-base">*This price is converted to show you the approximate cost in LKR. You&apos;ll pay in USS or LKR. The exchange rate might change before you pay. </p>
 
         <p className="text-gray-500 text-sm md:text-base">Keep in mind that your card issuer may charge you a foreign transaction fee. </p>
     

@@ -150,7 +150,7 @@ const PoliciesPage = () => {
                         the price for the fit st night.
                     </p>
                     <p className="text-sm font-semibold text-gray-500">
-                        Please note. You'll be able to make changes to your policies later on.
+                        Please note. You&apos;ll be able to make changes to your policies later on.
                         this is just to get you started.
                     </p>
                 </div>

@@ -309,8 +309,8 @@ const PaymentPage = () => {
                     <p className="text-sm text-justify">
                         To help you start earning, we automatically make your property open
                         for bookings for the next 18 months. If you would like to make changes
-                        to your availability before opening, you can choose 'complete
-                        registration and open later'. Your availability can also be adjusted
+                        to your availability before opening, you can choose &apos;complete
+                        registration and open later&apos;. Your availability can also be adjusted
                         after you open for bookings.
                     </p>
                     <p className="py-5 pt-8 text-base font-semibold text-gray-600">
@@ -359,7 +359,7 @@ const PaymentPage = () => {
         className="w-full py-4 bg-blue-700 text-white font-semibold text-base rounded-lg hover:bg-blue-900 text-bold"
       >
         {/* {loading ? <SharedButtonSpinner /> : 'Complete registration and open to bookings'} */}
-        Complete registration and open to bookings'
+        Complete registration and open to bookings&apos;
       </button>
 
       <button

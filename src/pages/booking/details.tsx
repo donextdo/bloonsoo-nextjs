@@ -220,7 +220,7 @@ const BookingDetailsPage = () => {
                                 className="text-green-600 text-base md:text-xl"
                             />
                             <p className="text-sm md:text-base">
-                                No payment is required to secure this booking. You'll pay during
+                                No payment is required to secure this booking. You&apos;ll pay during
                                 your stay.{" "}
                             </p>
                         </div>

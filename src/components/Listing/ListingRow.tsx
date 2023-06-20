@@ -36,7 +36,7 @@ const ListingRow = ({ room }: any) => {
             <div className="w-full bg-gray-200 col-span-1 p-4 h-full flex items-center justify-center">
                 <div className="flex justify-center flex-wrap gap-2">
                     {Array.from({ length: room.guests }).map((_, index) => (
-                        <FontAwesomeIcon icon={faUser} className="text-gray-800 text-lg" />
+                        <FontAwesomeIcon key={index} icon={faUser} className="text-gray-800 text-lg" />
                     ))}
                 </div>
             </div>
