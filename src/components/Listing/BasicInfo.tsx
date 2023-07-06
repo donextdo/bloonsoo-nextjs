@@ -153,8 +153,8 @@ const BasicInfo = () => {
   const mapRef = useRef(null);
 
   const handleLocationChange = (event: any) => {
-    setLocation(event.target.value);
     const location = event.target.value;
+    setLocation(location);
     const autocompleteService = new google.maps.places.AutocompleteService();
     autocompleteService.getPlacePredictions(
       {
@@ -195,10 +195,13 @@ const BasicInfo = () => {
           placeResult &&
           placeResult.address_components
         ) {
-          const lat = placeResult.geometry?.location?.lat();
-          const lng = placeResult.geometry?.location?.lng();
-          setLat(lat);
-          setLng(lng);
+          const lat = placeResult.geometry?.location?.lat?.();
+          const lng = placeResult.geometry?.location?.lng?.();
+
+          if (typeof lat === "number" && typeof lng === "number") {
+            setLat(lat);
+            setLng(lng);
+          }
           console.log("lat: ", lat);
           console.log("lng: ", lng);
 
@@ -220,13 +223,19 @@ const BasicInfo = () => {
           console.log("Formatted Address: ", formattedAddress);
 
           setLocation(formattedAddress as string);
-          setStreetAddress(location);
+          setStreetAddress(formattedAddress as string);
 
-          if (map) {
-            map.panTo({ lat, lng });
+          if (
+            (map as unknown as google.maps.Map) &&
+            typeof lat === "number" &&
+            typeof lng === "number"
+          ) {
+            (map as unknown as google.maps.Map).panTo(
+              new google.maps.LatLng(lat, lng)
+            );
             new google.maps.Marker({
-              position: { lat, lng },
-              map,
+              position: new google.maps.LatLng(lat, lng),
+              map: map as unknown as google.maps.Map,
             });
           }
         }
@@ -260,7 +269,10 @@ const BasicInfo = () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
-            const { latitude, longitude } = position.coords;
+            const { latitude, longitude } = position.coords as {
+              latitude: any;
+              longitude: any;
+            };
             setDefaultCoordinates({ lat: latitude, lng: longitude });
             console.log("latttt : ", defaultCoordinates);
             newMap.setCenter({ lat: latitude, lng: longitude });
