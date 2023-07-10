@@ -12,7 +12,7 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import map from "../../assets/map/map.jpg";
 import Script from "next/script";
-import { Loader, GoogleMap, Marker } from "@react-google-maps/api";
+import { GoogleMap, Marker } from "@react-google-maps/api";
 import Head from "next/head";
 
 interface Prediction {
@@ -56,11 +56,11 @@ const BasicInfo = () => {
   const [lat, setLat] = useState<number | null>(null);
   const [lng, setLng] = useState<number | null>(null);
   const [defaultCoordinates, setDefaultCoordinates] = useState({
-    lat: null,
-    lng: null,
+    lat: 0,
+    lng: 0,
   });
 
-  const [map, setMap] = useState(null);
+  const [map, setMap] = useState<google.maps.Map | null>(null);
 
   const [mapLoaded, setMapLoaded] = useState(false);
 
@@ -150,7 +150,7 @@ const BasicInfo = () => {
 
   //google address
 
-  const mapRef = useRef(null);
+  const mapRef = useRef<HTMLDivElement | null>(null);
 
   const handleLocationChange = (event: any) => {
     const location = event.target.value;
@@ -244,7 +244,7 @@ const BasicInfo = () => {
   }
 
   useEffect(() => {
-    if (lat && lng) {
+    if (lat && lng && mapRef.current) {
       const map = new google.maps.Map(mapRef.current, {
         center: { lat, lng },
         zoom: 14,
@@ -258,7 +258,7 @@ const BasicInfo = () => {
   }, [lat, lng]);
 
   useEffect(() => {
-    if (typeof google !== "undefined") {
+    if (typeof google !== "undefined" && mapRef.current) {
       const newMap = new google.maps.Map(mapRef.current, {
         center: defaultCoordinates,
         zoom: 14,
