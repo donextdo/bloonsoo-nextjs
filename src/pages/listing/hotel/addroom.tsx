@@ -286,6 +286,7 @@ const AddRoomPage = () => {
                             </select>
                             <FontAwesomeIcon icon={faCaretDown} className="text-gray-600 text-lg absolute right-4 top-0 bottom-0 my-auto cursor-pointer pointer-events-none" />
                         </div>
+                        
                         {roomTypeError && <p>Please select room type</p>}
                     </div>
 
