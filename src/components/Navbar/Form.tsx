@@ -59,6 +59,16 @@ const Form = () => {
   const handleInputChange = (e: any) => {
     setQuery(e.target.value);
   };
+
+  const viewHotelById = async (hotel: any) => {
+    setIsHide(true);
+    setQuery(hotel.property_name);
+    console.log("hotel : ", hotel.id);
+    router.push({
+      pathname: `/hotels/${hotel.id}`,
+    });
+  };
+
   return (
     <div className="relative mx-auto md:container px-10 md:px-20 -mt-14 z-20">
       <div className="relative w-full h-full border-4 rounded-lg px-8 py-4 bg-white border-blue-500 flex flex-col gap-4 md:px-24">
@@ -82,7 +92,7 @@ const Form = () => {
               className="absolute left-4 top-0 bottom-0 my-auto text-slate-700 text-2xl"
             />
           </div>
-          {results.length > 0 && (
+          {results.length > 0 && !isHide && (
             <div className="border border-gray-300 p-4 rounded-md">
               <ul>
                 {results.map((hotel: any, index) => (
@@ -91,12 +101,24 @@ const Form = () => {
                       <div>
                         <FaHotel className="mr-2 " />
                       </div>
-                      <div className="font-bold "> {hotel.property_name}</div>
+                      <div
+                        className="font-bold cursor-pointer"
+                        onClick={() => viewHotelById(hotel)}
+                      >
+                        {" "}
+                        {hotel.property_name}
+                      </div>
                     </div>
-                    <div className="text-sm">
+                    <div
+                      className="text-sm"
+                      onClick={() => viewHotelById(hotel)}
+                    >
                       <span>{hotel.street_address}</span>
                     </div>
-                    <div className="text-sm">
+                    <div
+                      className="text-sm"
+                      onClick={() => viewHotelById(hotel)}
+                    >
                       <span className="mr-2">{hotel.city}</span>
                     </div>
                   </li>
