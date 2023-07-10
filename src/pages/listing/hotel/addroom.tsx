@@ -95,26 +95,26 @@ const AddRoomPage = () => {
         { data: 'Water park', label: 'Water park' }
     ]
 
-      const addBed = () => {
+    const addBed = () => {
         setTimeout(() => {
-          setBedTypeError(false);
-          setNoOfBedsError(false);
+            setBedTypeError(false);
+            setNoOfBedsError(false);
         }, 10000);
 
         // if (bedType === '0') return setBedTypeError(true);
         // if (noOfBeds === '0') return setNoOfBedsError(true);
 
         const bedDto = {
-          bed_type: bedType,
-          no_of_beds: noOfBeds,
+            bed_type: bedType,
+            no_of_beds: noOfBeds,
         };
 
         setBeds((prevBeds) => [...prevBeds, bedDto]);
 
         setTimeout(() => {
-          setAddAnotherBed(false);
+            setAddAnotherBed(false);
         }, 1000);
-      };
+    };
 
     const removeBed = (bedType: any) => {
         setBeds((prevBeds) => prevBeds.filter((bed) => bed.bed_type !== bedType));
@@ -183,7 +183,7 @@ const AddRoomPage = () => {
         console.log("dsdsd")
 
         const roomDto = {
-              property_id: '64891ccb8a2b7df04273a122',
+            property_id: hotelId,
             room_type: roomType,
             room_name: roomName,
             smoking_policy: smokingPolicy,
@@ -203,28 +203,28 @@ const AddRoomPage = () => {
 
         try {
             const response = await axios.post(`${baseUrl}/rooms/create`, roomDto, {
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-              },
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
             });
-          
-            const room = response.data;
-            
-            setLoading(false);
-            const hotelData = {  hotelId:hotelId };
-            console.log(hotelData)
-            // router.push({
-            //     pathname: '/listing/hotel/pricing"',
-            //     query: hotelData,
-            // });
 
-          } catch (error) {
+            const room = response.data;
+            console.log(room)
+            setLoading(false);
+            const hotelData = { hotelId: hotelId };
+            console.log(hotelData)
+            router.push({
+                pathname: '/listing/hotel/pricing',
+                query: hotelData,
+            });
+
+        } catch (error) {
             // Handle any errors that occurred during the request
             console.error(error);
-          }
+        }
 
-          setBeds([]);
+        setBeds([]);
 
     };
 
@@ -259,32 +259,32 @@ const AddRoomPage = () => {
                     <div className="flex flex-col gap-2 ">
                         <label htmlFor="roomType" className="text-gray-600 text-sm font-semibold">Room Type</label>
                         <div className="w-full h-max relative">
-                        <select
-                            id="roomType"
-                            value={roomType}
-                            onChange={(event) => setRoomType(event.target.value)}
-                            className="w-full px-6 py-2 border bg-white border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none appearance-none"
-                        >
-                            <option value="0" className="text-sm font-semibold text-gray-500 appearance-none">Please select</option>
-                            {[
-                                'Single Room',
-                                'Double Room',
-                                'Twin Room',
-                                'Twin/double Room',
-                                'Triple Room',
-                                'Quadruple Room',
-                                'Family Room',
-                                'Suite Room',
-                                'Apartment Room',
-                                'Dormitory room',
-                                'Bed in dormitor'
-                            ].map((option, index) => (
-                                <option key={index} value={option} className="text-sm font-semibold text-gray-500 appearance-none">
-                                    {option}
-                                </option>
-                            ))}
-                        </select>
-                        <FontAwesomeIcon icon={faCaretDown} className="text-gray-600 text-lg absolute right-4 top-0 bottom-0 my-auto cursor-pointer pointer-events-none" />
+                            <select
+                                id="roomType"
+                                value={roomType}
+                                onChange={(event) => setRoomType(event.target.value)}
+                                className="w-full px-6 py-2 border bg-white border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none appearance-none"
+                            >
+                                <option value="0" className="text-sm font-semibold text-gray-500 appearance-none">Please select</option>
+                                {[
+                                    'Single Room',
+                                    'Double Room',
+                                    'Twin Room',
+                                    'Twin/double Room',
+                                    'Triple Room',
+                                    'Quadruple Room',
+                                    'Family Room',
+                                    'Suite Room',
+                                    'Apartment Room',
+                                    'Dormitory room',
+                                    'Bed in dormitor'
+                                ].map((option, index) => (
+                                    <option key={index} value={option} className="text-sm font-semibold text-gray-500 appearance-none">
+                                        {option}
+                                    </option>
+                                ))}
+                            </select>
+                            <FontAwesomeIcon icon={faCaretDown} className="text-gray-600 text-lg absolute right-4 top-0 bottom-0 my-auto cursor-pointer pointer-events-none" />
                         </div>
                         {roomTypeError && <p>Please select room type</p>}
                     </div>
@@ -304,19 +304,19 @@ const AddRoomPage = () => {
                     <div className="flex flex-col gap-2 ">
                         <label htmlFor="roomType" className="text-gray-600 text-sm font-semibold">Smoking policy</label>
                         <div className="w-full h-max relative">
-                        <select
-                            id="roomType"
-                            value={smokingPolicy}
-                            onChange={(event) => setSmokingPolicy(event.target.value)}
-                            className="w-full px-6 py-2 border bg-white border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none appearance-none"
-                        >
-                            {['Non-smoking', 'Smoking', 'Both options'].map((option, index) => (
-                                <option key={index} value={option} className="text-sm font-semibold text-gray-500 appearance-none">
-                                    {option}
-                                </option>
-                            ))}
-                        </select>
-                        <FontAwesomeIcon icon={faCaretDown} className="text-gray-600 text-lg absolute right-4 top-0 bottom-0 my-auto cursor-pointer pointer-events-none" />
+                            <select
+                                id="roomType"
+                                value={smokingPolicy}
+                                onChange={(event) => setSmokingPolicy(event.target.value)}
+                                className="w-full px-6 py-2 border bg-white border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none appearance-none"
+                            >
+                                {['Non-smoking', 'Smoking', 'Both options'].map((option, index) => (
+                                    <option key={index} value={option} className="text-sm font-semibold text-gray-500 appearance-none">
+                                        {option}
+                                    </option>
+                                ))}
+                            </select>
+                            <FontAwesomeIcon icon={faCaretDown} className="text-gray-600 text-lg absolute right-4 top-0 bottom-0 my-auto cursor-pointer pointer-events-none" />
                         </div>
                         {roomTypeError && <p>please enter Smoking policy</p>}
                     </div>
@@ -352,126 +352,126 @@ const AddRoomPage = () => {
                             <div className="grid grid-cols-12 gap-x-8 items-end">
 
 
-                            <div className="flex flex-col gap-2 col-span-6 ">
-                            <div className="w-full h-max relative">
+                                <div className="flex flex-col gap-2 col-span-6 ">
+                                    <div className="w-full h-max relative">
 
-                                <select
-                                    id="roomType"
-                                    value={bedType}
-                                    onChange={(event) => setBedType(event.target.value)}
-                                    className="w-full px-6 py-2 border bg-white border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none appearance-none"
-                                >
-                                    {[
-                                        'Single bed / 90-130 cm wide',
-                                        'Double bed / 90-130 cm wide',
-                                        'Large bed (king size) / 151-180 cm wide',
-                                        'Extra-large double bed (Super-king size) / 181-210 cm wide',
-                                        'Bunk bed / variable Size',
-                                        'Sofa bed / variable Size',
-                                        'Futon Mat / variable Size'
-                                    ].map((option, index) => (
-                                        <option key={index} value={option} className="text-sm font-semibold text-gray-500 appearance-none">
-                                            {option}
-                                        </option>
-                                    ))}
-                                </select>
-                                <FontAwesomeIcon icon={faCaretDown} className="text-gray-600 text-lg absolute right-4 top-0 bottom-0 my-auto cursor-pointer pointer-events-none" />
+                                        <select
+                                            id="roomType"
+                                            value={bedType}
+                                            onChange={(event) => setBedType(event.target.value)}
+                                            className="w-full px-6 py-2 border bg-white border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none appearance-none"
+                                        >
+                                            {[
+                                                'Single bed / 90-130 cm wide',
+                                                'Double bed / 90-130 cm wide',
+                                                'Large bed (king size) / 151-180 cm wide',
+                                                'Extra-large double bed (Super-king size) / 181-210 cm wide',
+                                                'Bunk bed / variable Size',
+                                                'Sofa bed / variable Size',
+                                                'Futon Mat / variable Size'
+                                            ].map((option, index) => (
+                                                <option key={index} value={option} className="text-sm font-semibold text-gray-500 appearance-none">
+                                                    {option}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        <FontAwesomeIcon icon={faCaretDown} className="text-gray-600 text-lg absolute right-4 top-0 bottom-0 my-auto cursor-pointer pointer-events-none" />
+                                    </div>
+                                    {roomTypeError && <p>please enter Smoking policy</p>}
                                 </div>
-                                {roomTypeError && <p>please enter Smoking policy</p>}
+
+                                <div className="flex flex-col gap-2 col-span-4 relative">
+
+                                    <select
+                                        id="roomType"
+                                        value={noOfBeds}
+                                        onChange={(event) => setNoOfBeds(Number(event.target.value))}
+                                        className="w-full px-6 py-2 border bg-white border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none appearance-none"
+                                    >
+                                        {['1', '2', '3', '4', '5'].map((option, index) => (
+                                            <option key={index} value={option} className="text-sm font-semibold text-gray-500 appearance-none">
+                                                {option}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <FontAwesomeIcon icon={faCaretDown} className="text-gray-600 text-lg absolute right-4 top-0 bottom-0 my-auto cursor-pointer pointer-events-none" />
+                                    {roomTypeError && <p>please enter Smoking policy</p>}
+                                </div>
+
+                                <button
+                                    onClick={() => removeBed(bedType)}
+                                    className="w-full h-9 col-span-2 bg-red-500 text-sm font-semibold text-white flex items-center justify-center gap-2 hover:bg-red-700">
+
+                                    <FontAwesomeIcon icon={faPlusCircle} className="text-white text-base " />
+                                    <span>Remove</span>
+
+                                </button>
+
                             </div>
-
-                            <div className="flex flex-col gap-2 col-span-4 relative">
-
-                                <select
-                                    id="roomType"
-                                    value={noOfBeds}
-                                    onChange={(event) => setNoOfBeds(Number(event.target.value))}
-                                    className="w-full px-6 py-2 border bg-white border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none appearance-none"
-                                >
-                                    {['1', '2', '3', '4', '5'].map((option, index) => (
-                                        <option key={index} value={option} className="text-sm font-semibold text-gray-500 appearance-none">
-                                            {option}
-                                        </option>
-                                    ))}
-                                </select>
-                                <FontAwesomeIcon icon={faCaretDown} className="text-gray-600 text-lg absolute right-4 top-0 bottom-0 my-auto cursor-pointer pointer-events-none" />
-                                {roomTypeError && <p>please enter Smoking policy</p>}
-                            </div>
-
-                            <button
-                                onClick={()=>removeBed(bedType)}
-                                className="w-full h-9 col-span-2 bg-red-500 text-sm font-semibold text-white flex items-center justify-center gap-2 hover:bg-red-700">
-
-                                <FontAwesomeIcon icon={faPlusCircle} className="text-white text-base " />
-                                <span>Remove</span>
-
-                            </button>
-
-                        </div>
                         )}
-                        
+
                         {((beds.length === 0) || addAnotherBed) && (
                             <div className="grid grid-cols-12 gap-x-8 items-end">
 
 
-                            <div className="flex flex-col gap-2 col-span-6 relative">
+                                <div className="flex flex-col gap-2 col-span-6 relative">
 
-                                <select
-                                    id="roomType"
-                                    value={bedType}
-                                    onChange={(event) => setBedType(event.target.value)}
-                                    className="w-full px-6 py-2 border bg-white border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none appearance-none"
-                                >
-                                    <option value="0" className="text-sm font-semibold text-gray-500 appearance-none">Please select a bed type</option>
-                                    {[
-                                        'Single bed / 90-130 cm wide',
-                                        'Double bed / 90-130 cm wide',
-                                        'Large bed (king size) / 151-180 cm wide',
-                                        'Extra-large double bed (Super-king size) / 181-210 cm wide',
-                                        'Bunk bed / variable Size',
-                                        'Sofa bed / variable Size',
-                                        'Futon Mat / variable Size'
-                                    ].map((option, index) => (
-                                        <option key={index} value={option} className="text-sm font-semibold text-gray-500 appearance-none">
-                                            {option}
-                                        </option>
-                                    ))}
-                                </select>
-                                <FontAwesomeIcon icon={faCaretDown} className="text-gray-600 text-lg absolute right-4 top-0 bottom-0 my-auto cursor-pointer pointer-events-none" />
-                                {roomTypeError && <p>please enter Smoking policy</p>}
+                                    <select
+                                        id="roomType"
+                                        value={bedType}
+                                        onChange={(event) => setBedType(event.target.value)}
+                                        className="w-full px-6 py-2 border bg-white border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none appearance-none"
+                                    >
+                                        <option value="0" className="text-sm font-semibold text-gray-500 appearance-none">Please select a bed type</option>
+                                        {[
+                                            'Single bed / 90-130 cm wide',
+                                            'Double bed / 90-130 cm wide',
+                                            'Large bed (king size) / 151-180 cm wide',
+                                            'Extra-large double bed (Super-king size) / 181-210 cm wide',
+                                            'Bunk bed / variable Size',
+                                            'Sofa bed / variable Size',
+                                            'Futon Mat / variable Size'
+                                        ].map((option, index) => (
+                                            <option key={index} value={option} className="text-sm font-semibold text-gray-500 appearance-none">
+                                                {option}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <FontAwesomeIcon icon={faCaretDown} className="text-gray-600 text-lg absolute right-4 top-0 bottom-0 my-auto cursor-pointer pointer-events-none" />
+                                    {roomTypeError && <p>please enter Smoking policy</p>}
+                                </div>
+
+                                <div className="flex flex-col gap-2 col-span-4 relative">
+
+                                    <select
+                                        id="roomType"
+                                        value={noOfBeds}
+                                        onChange={(event) => setNoOfBeds(Number(event.target.value))}
+                                        className="w-full px-6 py-2 border bg-white border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none appearance-none"
+                                    >
+                                        <option value="0" className="text-sm font-semibold text-gray-500 appearance-none">Select the number of beds</option>
+                                        {['1', '2', '3', '4', '5'].map((option, index) => (
+                                            <option key={index} value={option} className="text-sm font-semibold text-gray-500 appearance-none">
+                                                {option}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <FontAwesomeIcon icon={faCaretDown} className="text-gray-600 text-lg absolute right-4 top-0 bottom-0 my-auto cursor-pointer pointer-events-none" />
+                                    {roomTypeError && <p>please enter Smoking policy</p>}
+                                </div>
+
+                                <button
+                                    onClick={addBed}
+                                    className="w-full h-9 col-span-2 bg-blue-500 text-sm font-semibold text-white flex items-center justify-center gap-2 hover:bg-blue-700">
+
+                                    <FontAwesomeIcon icon={faPlusCircle} className="text-white text-base " />
+                                    <span>Add</span>
+
+                                </button>
+
                             </div>
-
-                            <div className="flex flex-col gap-2 col-span-4 relative">
-
-                                <select
-                                    id="roomType"
-                                    value={noOfBeds}
-                                    onChange={(event) => setNoOfBeds(Number(event.target.value))}
-                                    className="w-full px-6 py-2 border bg-white border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none appearance-none"
-                                >
-                                    <option value="0" className="text-sm font-semibold text-gray-500 appearance-none">Select the number of beds</option>
-                                    {['1', '2', '3', '4', '5'].map((option, index) => (
-                                        <option key={index} value={option} className="text-sm font-semibold text-gray-500 appearance-none">
-                                            {option}
-                                        </option>
-                                    ))}
-                                </select>
-                                <FontAwesomeIcon icon={faCaretDown} className="text-gray-600 text-lg absolute right-4 top-0 bottom-0 my-auto cursor-pointer pointer-events-none" />
-                                {roomTypeError && <p>please enter Smoking policy</p>}
-                            </div>
-
-                            <button
-                                onClick={addBed}
-                                className="w-full h-9 col-span-2 bg-blue-500 text-sm font-semibold text-white flex items-center justify-center gap-2 hover:bg-blue-700">
-
-                                <FontAwesomeIcon icon={faPlusCircle} className="text-white text-base " />
-                                <span>Add</span>
-
-                            </button>
-
-                        </div>
                         )}
-                        
+
 
                         {bedsError && (
                             <small className="text-xs text-red-600">
@@ -495,19 +495,19 @@ const AddRoomPage = () => {
                             <div className="flex flex-col gap-2 ">
                                 <label htmlFor="roomType" className="text-gray-600 text-sm font-semibold">How many guests can stay in this room?</label>
                                 <div className="w-full h-max relative">
-                                <select
-                                    id="roomType"
-                                    value={guests}
-                                    onChange={(event) => setGuests(event.target.value)}
-                                    className="w-full px-6 py-2 border bg-white border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none appearance-none"
-                                >
-                                    {['1', '2', '3', '4', '5', '6', '7', '8'].map((option, index) => (
-                                        <option key={index} value={option} className="text-sm font-semibold text-gray-500 appearance-none">
-                                            {option}
-                                        </option>
-                                    ))}
-                                </select>
-                                <FontAwesomeIcon icon={faCaretDown} className="text-gray-600 text-lg absolute right-4 top-0 bottom-0 my-auto cursor-pointer pointer-events-none" />
+                                    <select
+                                        id="roomType"
+                                        value={guests}
+                                        onChange={(event) => setGuests(event.target.value)}
+                                        className="w-full px-6 py-2 border bg-white border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none appearance-none"
+                                    >
+                                        {['1', '2', '3', '4', '5', '6', '7', '8'].map((option, index) => (
+                                            <option key={index} value={option} className="text-sm font-semibold text-gray-500 appearance-none">
+                                                {option}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <FontAwesomeIcon icon={faCaretDown} className="text-gray-600 text-lg absolute right-4 top-0 bottom-0 my-auto cursor-pointer pointer-events-none" />
                                 </div>
                                 {/* {roomTypeError && <p>please enter country</p>} */}
                             </div>
@@ -524,70 +524,70 @@ const AddRoomPage = () => {
                     <div className="">
                         <p className="text-gray-600 text-sm font-semibold">Do you provide breakfast?</p>
                         <div className="flex gap-2">
-                        
-                        {[
-                            { value: 'yes', label: 'Yes' },
-                            { value: 'no', label: 'No' },
-                        ].map((option, index) => (
-                            <label key={index} className="text-gray-600 text-sm h-max w-max font-semibold flex items-center">
-                                <input
-                                    type="radio"
-                                    name="breakfast"
-                                    value={option.value}
-                                    onChange={() => setBreakfastOption(option.value)}
-                                    className="mr-2 w-4 h-4 cursor-pointer"
-                                />
-                                {option.label}
-                            </label>
-                        ))}
+
+                            {[
+                                { value: 'yes', label: 'Yes' },
+                                { value: 'no', label: 'No' },
+                            ].map((option, index) => (
+                                <label key={index} className="text-gray-600 text-sm h-max w-max font-semibold flex items-center">
+                                    <input
+                                        type="radio"
+                                        name="breakfast"
+                                        value={option.value}
+                                        onChange={() => setBreakfastOption(option.value)}
+                                        className="mr-2 w-4 h-4 cursor-pointer"
+                                    />
+                                    {option.label}
+                                </label>
+                            ))}
                         </div>
                     </div>
 
                     <div>
-                    {breakfastOption === 'yes' && (
-                        <>
-                            <div className="flex flex-col gap-2 w-full">
-                                <label className={`text-sm font-semibold ${priceError ? 'text-red-600' : 'text-gray-600'}`}>
-                                    Price for Breakfast
-                                </label>
-                            </div>
-
-                            <div className="w-full grid grid-cols-6 ">
-
-                                <div className="flex flex-col gap-2 relative">
-
-                                    <select
-                                        id="roomType"
-                                        value={breakfastPriceUnit}
-                                        onChange={(event) => setBreakfastPriceUnit(event.target.value)}
-                                        className="w-full px-6 py-2 border bg-white border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none appearance-none"
-                                    >
-                                        {['USD', 'LKR', 'AUD'].map((option, index) => (
-                                            <option key={index} value={option} className="text-sm font-semibold text-gray-500 appearance-none">
-                                                {option}
-                                            </option>
-                                        ))}
-                                    </select>
-                                    <FontAwesomeIcon icon={faCaretDown} className="text-gray-600 text-lg absolute right-4 top-0 bottom-0 my-auto cursor-pointer pointer-events-none" />
-                                    {/* {roomTypeError && <p>please enter price unit</p>} */}
+                        {breakfastOption === 'yes' && (
+                            <>
+                                <div className="flex flex-col gap-2 w-full">
+                                    <label className={`text-sm font-semibold ${priceError ? 'text-red-600' : 'text-gray-600'}`}>
+                                        Price for Breakfast
+                                    </label>
                                 </div>
 
-                                <div className="flex flex-col gap-2 col-span-3">
+                                <div className="w-full grid grid-cols-6 ">
 
-                                    <input
-                                        type="number"
-                                        value={breakfastPrice}
-                                        onChange={(e) => setBreakfastPrice(Number(e.target.value))}
-                                        className="w-full px-6 py-2 border bg-white border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none appearance-none"
-                                    />
-                                    {/* {nbrOfRoomsError && <p>please enter a price</p>} */}
+                                    <div className="flex flex-col gap-2 relative col-span-2">
+
+                                        <select
+                                            id="roomType"
+                                            value={breakfastPriceUnit}
+                                            onChange={(event) => setBreakfastPriceUnit(event.target.value)}
+                                            className="w-full px-6 py-2 border bg-white border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none appearance-none"
+                                        >
+                                            {['USD', 'LKR', 'AUD'].map((option, index) => (
+                                                <option key={index} value={option} className="text-sm font-semibold text-gray-500 appearance-none">
+                                                    {option}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        <FontAwesomeIcon icon={faCaretDown} className="text-gray-600 text-lg absolute right-4 top-0 bottom-0 my-auto cursor-pointer pointer-events-none" />
+                                        {/* {roomTypeError && <p>please enter price unit</p>} */}
+                                    </div>
+
+                                    <div className="col-span-4">
+
+                                        <input
+                                            type="number"
+                                            value={breakfastPrice}
+                                            onChange={(e) => setBreakfastPrice(Number(e.target.value))}
+                                            className="w-full px-6 py-2 border bg-white border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none appearance-none"
+                                        />
+                                        {/* {nbrOfRoomsError && <p>please enter a price</p>} */}
+                                    </div>
+
                                 </div>
+                            </>
 
-                            </div>
-                        </>
-
-                    )}
-    </div>
+                        )}
+                    </div>
 
 
                 </div>
@@ -595,11 +595,11 @@ const AddRoomPage = () => {
             </FormCard>
 
             <FormCard label="Room Size (Optional)" >
-                <div className="grid grid-cols-2 gap-x-8 px-4">
+                {/* <div className="grid grid-cols-2 gap-x-8 px-4"> */}
 
-                    <div className="w-full grid grid-cols-3 items-end">
+                    <div className="w-full grid grid-cols-3 items-end px-4">
 
-                        <div className="flex flex-col gap-2 col-span-2">
+                        <div className="col-span-2">
                             <label className="text-gray-600 text-sm font-semibold">How big is the room?</label>
                             <input
                                 type="number"
@@ -610,7 +610,7 @@ const AddRoomPage = () => {
                             {/* {nbrOfRoomsError && <p>please enter room name</p>} */}
                         </div>
 
-                        <div className="flex flex-col gap-2 relative">
+                        <div className="col-span-1 relative">
 
                             <select
                                 id="roomType"
@@ -631,7 +631,7 @@ const AddRoomPage = () => {
 
                     </div>
 
-                </div>
+                {/* </div> */}
             </FormCard>
 
             <FormCard label="Base price per night">
@@ -643,7 +643,7 @@ const AddRoomPage = () => {
 
                     <div className="grid grid-cols-3 gap-x-8">
 
-                        <div className="flex flex-col gap-2 w-full">
+                        <div className="flex flex-col gap-2 w-full col-span-2">
 
                             <label className={`text-sm font-semibold ${priceError ? 'text-red-600' : 'text-gray-600'}`}>
                                 Price for 1 person ( 1 night)
@@ -799,11 +799,11 @@ const AddRoomPage = () => {
                 </div>
             </FormCard>
 
-            <button onClick={addRoom} className="w-full py-4 bg-blue-700 text-white font-semibold text-base rounded-lg hover:bg-blue-900">      
-            {/* <SharedButtonSpinner v-if="loading"/> */}
-            {/* <span v-else>Add Room</span>  */}
-            Add Room
-        </button>
+            <button onClick={addRoom} className="w-full py-4 bg-blue-700 text-white font-semibold text-base rounded-lg hover:bg-blue-900">
+                {/* <SharedButtonSpinner v-if="loading"/> */}
+                {/* <span v-else>Add Room</span>  */}
+                Add Room
+            </button>
 
         </section >
 

@@ -52,7 +52,7 @@ const PaymentPage = () => {
     const addPaymentDataAndOpenToBooking = async () => {
         setTimeout(() => {
             setCreditCardOptionError(false);
-        }, 10000);
+        }, 1000);
 
         if (!creditCardOption) {
             setCreditCardOptionError(true);

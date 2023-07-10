@@ -15,7 +15,7 @@ const AdditionalInformation = ({hotel}:any) => {
             Visit Nine Arch Bridge: Explore the iconic Nine Arch Bridge, a marvel of engineering hidden amidst the lush greenery. Watch as trains pass over the bridge, capturing memorable photos and enjoying the scenic surroundings.
             </div>
             <div className="bg-blue-50 p-2 rounded-sm shadow-md">
-            Experience Little Adam's Peak: Trek to Little Adam's Peak, a relatively easy hike that offers spectacular views of Ella's landscape. The trek takes around 1-2 hours, and you'll be rewarded with stunning vistas of tea plantations, valleys, and mountains.
+            Experience Little Adam&apos;s Peak: Trek to Little Adam&apos;s Peak, a relatively easy hike that offers spectacular views of Ella&apos;s landscape. The trek takes around 1-2 hours, and you&apos;ll be rewarded with stunning vistas of tea plantations, valleys, and mountains.
             </div>
         </div>
     );

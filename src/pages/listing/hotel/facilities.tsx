@@ -213,7 +213,7 @@ const FacilitiesPage = () => {
 
             <FormCard label="Parking" >
 
-                <div className="grid grid-cols-3 gap-x-8 gap-y-6 px-4 items-end">
+                <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-6 px-4 items-end">
 
                     <div>
                         <label className="text-gray-600 text-sm font-semibold">Is parking available to the guests?</label>

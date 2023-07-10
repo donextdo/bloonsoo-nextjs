@@ -27,12 +27,23 @@ const Review = ({ hotelId, hotel }: any) => {
     const [data, setData] = useState<Array<Review>>([])
     const [user, setUser] = useState("")
     const [userEmail, setUserEmail] = useState("")
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 
 
 
 
 
     let id = localStorage.getItem("id");
+    useEffect(() => {
+        const userString = localStorage.getItem('user');
+        const userArray = userString ? JSON.parse(userString) : [];
+        if (userArray) {
+          setIsLoggedIn(true);
+        }
+      }, []);
+    
+    
     const router = useRouter();
 
  useEffect(() => {
@@ -53,7 +64,7 @@ const Review = ({ hotelId, hotel }: any) => {
 
     async function fetchData() {
         try {
-            const res = await axios.get(`${baseUrl}/reviews/getReview/${hotelId}`);
+            const res = await axios.get(`${baseUrl}/review/getReview/${hotelId}`);
             console.log(res.data)
             setData(res.data);
         } catch (err) {
@@ -63,7 +74,7 @@ const Review = ({ hotelId, hotel }: any) => {
 
     // submit savetext
     const handleSubmit = async () => {
-        if (id) {
+        if (isLoggedIn) {
             const review = text
 
             const data = {
@@ -90,7 +101,7 @@ const Review = ({ hotelId, hotel }: any) => {
                 //   },
                 // };
 
-                    const response = await axios.post(`${baseUrl}/reviews/insert`, data);
+                    const response = await axios.post(`${baseUrl}/review/insert`, data);
                     console.log(response.data); // do something with the response data
                     setText("");
 

@@ -113,7 +113,7 @@ const HotelPages = () => {
 
                     </section>
                     <aside className="w-96 px-5 md:w-full md:col-span-1 h-full flex flex-col gap-4">
-                        <HotelMap />
+                        {/* <HotelMap /> */}
 
                         <HotelRating hotel={hotel} />
 

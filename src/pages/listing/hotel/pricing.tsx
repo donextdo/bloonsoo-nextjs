@@ -26,6 +26,7 @@ const PricingPage = () => {
         const fetchRooms = async () => {
             try {
                 const response = await axios.get(`${baseUrl}/rooms/bypropertyid/${hotelId}`);
+                console.log(response.data)
                 setRooms(response.data);
             } catch (error) {
                 // Handle error if needed
@@ -34,9 +35,6 @@ const PricingPage = () => {
 
         fetchRooms();
 
-        return () => {
-            // Clean up any resources if needed
-        };
     }, [hotelId]);
 
     const postNext = () => {
@@ -54,7 +52,7 @@ const PricingPage = () => {
         const hotelData = {  hotelId:hotelId };
         console.log(hotelData)
         router.push({
-            pathname: '/listing/hotel/addroom"',
+            pathname: '/listing/hotel/addroom',
             query: hotelData,
         });
     };
@@ -63,6 +61,7 @@ const PricingPage = () => {
         'Room Type', 'Sleeps', 'Price for one night', 'Your Choices', 'Rooms', 'Actions'
     ];
 
+    console.log(rooms)
     return (
         <section className="md:container mx-auto px-10 py-16 flex flex-col gap-8 text-black font-montserrat">
             <h2 className="text-2xl font-semibold mb-6">List your property on Bloonsoo.com</h2>

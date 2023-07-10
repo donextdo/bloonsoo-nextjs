@@ -52,7 +52,7 @@ const PasswordReset = () => {
                     };
 
                     console.log(loginDto)
-                    const response = await axios.post(`${baseUrl}/api/auth/reset-password`, loginDto)
+                    const response = await axios.post(`${baseUrl}/auth/reset-password`, loginDto)
 
                     // const data = await $fetch(`${baseUrl}/api/auth/reset-password`, {
                     //     method: 'POST',
