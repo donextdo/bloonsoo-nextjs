@@ -18,6 +18,8 @@ import LoginPopup from "@/components/Auth/LoginPopup/LoginPopup";
 import Description from "@/components/ViewItem/Details/Description";
 import AdditionalInformation from "@/components/ViewItem/Details/AdditionalInformation";
 import Review from "@/components/ViewItem/Details/Review";
+import MobileRoomCard from "@/components/Hotel/MobileRoomCard";
+import MobileReserveAll from "@/components/Hotel/MobileReserveAll";
 
 // import { storeToRefs } from "pinia";
 
@@ -101,8 +103,8 @@ const HotelPages = () => {
     return (
         <div>
             <section className="flex flex-col gap-14 bg-gray-50 text-black font-montserrat mb-8">
-                <main className="md:container md:mx-auto  md:px-2 pt-16 pb-6 grid  md:grid-cols-3 gap-5 md:w-full">
-                    <section className="w-96 px-5  mb-5 md:mb-0 md:w-full md:col-span-2 ">
+                <main className="md:container md:mx-auto  md:px-2 pt-16 pb-6 grid  grid-cols-1 md:grid-cols-3 gap-5 w-full">
+                    <section className="w-full px-5  mb-5 md:mb-0 md:w-full md:col-span-2 ">
 
                         <Gallery
                             hotelGallery={hotelGallery}
@@ -112,7 +114,7 @@ const HotelPages = () => {
                         <HotelDetails hotel={hotel} />
 
                     </section>
-                    <aside className="w-96 px-5 md:w-full md:col-span-1 h-full flex flex-col gap-4">
+                    <aside className="w-full px-5 md:w-full md:col-span-1 h-full flex flex-col gap-4">
                         {/* <HotelMap /> */}
 
                         <HotelRating hotel={hotel} />
@@ -163,9 +165,17 @@ const HotelPages = () => {
                                 toggleRoomModal={toggleRoomModal}
                             />
                      ))}
-
+                        
+                        {rooms.map((room) => (
+                            <MobileRoomCard
+                                key="room._id"
+                                room={room}
+                                toggleRoomModal={toggleRoomModal}
+                            />
+                     ))}
                     
 
+                        <MobileReserveAll hotel={hotel}/>
 
                 </section>
 

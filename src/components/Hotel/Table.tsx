@@ -16,6 +16,7 @@ const Table = ({ headers, hotel}: any) => {
   };
 
   return (
+    <div className="hidden lg:block">
     <div className="w-full flex flex-col gap-3">
       <div className="w-full bg-blue-700 gap-2 grid grid-cols-12 items-center text-white text-base font-semibold">
         <div className="w-full col-span-4 px-6 h-24 flex items-center">
@@ -58,6 +59,7 @@ const Table = ({ headers, hotel}: any) => {
 {authPopup && (
         <LoginPopup setAuthPopup={setAuthPopup}/>
       )}
+    </div>
     </div>
   );
 }

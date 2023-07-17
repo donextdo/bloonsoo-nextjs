@@ -63,8 +63,12 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
 
             <div className="flex gap-2">
                 {isLoggedIn ? (
+                    <div className='flex gap-2'>
                 <Link href='/listing' className="py-2 px-3 md:py-2 md:px-6 rounded-full gradient-btn">Become A Host</Link>
+                <Link href='/wishlist' className="py-2 px-3 md:py-2 md:px-6 rounded-full ">Wishlist</Link>
 
+                    </div>
+                
                 ): null}
 
                 {/* <button 

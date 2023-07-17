@@ -34,7 +34,7 @@ const Row = ({ room, toggleRoomModal }: any) => {
       console.log('isRoomBooked:', isRoomBooked);
 
     return (
-
+        <div className='hidden lg:block'>
         <div className="w-full gap-2 grid grid-cols-12 items-center">
             <div className="w-full bg-gray-200 col-span-4 pl-6 p-4 h-full flex flex-col gap-4">
                 <div className="text-base text-blue-700 font-semibold">
@@ -127,7 +127,7 @@ const Row = ({ room, toggleRoomModal }: any) => {
                 <ReservePopup room={room} setShowReservePopup={setShowReservePopup} />
             )}
         </div>
-
+        </div>
     );
 }
 

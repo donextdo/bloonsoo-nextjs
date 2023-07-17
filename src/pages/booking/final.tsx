@@ -318,7 +318,7 @@ const BookingFinalPage = () => {
                     </FormCard>
 
                     <FormCard label="Select a Payment Option" className="shadow-md !bg-gray-300 ">
-                        <div className="px-4 w-full flex gap-4 text-gray-600 text-sm font-semibold space-y-10 md:space-y-0">
+                        <div className="px-4 w-full flex gap-4 text-gray-600 text-sm font-semibold ">
                             <div className="flex flex-col items-center gap-2 flex-1">
                                 <label htmlFor="credit-card" className="cursor-pointer">
                                     <FontAwesomeIcon icon={faCreditCard} className="text-blue-600 text-2xl md:text-5xl" />
