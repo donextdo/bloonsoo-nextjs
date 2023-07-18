@@ -1,0 +1,29 @@
+export interface Hotel {
+    breakfast: boolean;
+    contact_name: string;
+    contact_phone_number: string;
+    contact_phone_number_alternative: string;
+    cover_image: string;
+    createdAt: string;
+    credit_card_options: boolean;
+    extra_beds: boolean;
+    extra_beds_options: null;
+    facilities: string[];
+    gallery_images: string[];
+    is_open_to_bookings: boolean;
+    is_own_multiple_hotels: boolean;
+    languages: string[];
+    parking: boolean;
+    parking_details: string;
+    policies: string;
+    property_address: string;
+    property_name: string;
+    rooms: string[];
+    star_rating: string;
+    status: string;
+    updatedAt: string;
+    use_channel_manager: boolean;
+    user: string;
+    __v: number;
+    _id: string;
+  }
