@@ -27,17 +27,10 @@ const SwiperSlidershow = ({ hotelGallery }: any) => {
             {hotelGallery.map((img: any, index: any) => (
                 <SwiperSlide key={index}>
 
-                    <Image
+                    <img
                         src={img}
                         alt="item1"
-                        style={{
-                            objectFit: "cover",
-                            backgroundColor: "white",
-                            width: "100%",
-                            height: "100%",
-                        }}
-                        width={450}
-                        height={400}
+                        className='w-full h-full object-cover bg-white'
                     />
 
                 </SwiperSlide>
@@ -53,17 +46,10 @@ const SwiperSlidershow = ({ hotelGallery }: any) => {
             {hotelGallery.map((img: any, index: any) => (
                 <SwiperSlide key={index}>
 
-                    <Image
+                    <img
                         src={img}
                         alt="item1"
-                        style={{
-                            objectFit: "cover",
-                            backgroundColor: "white",
-                            width: "100%",
-                            height: "100%",
-                        }}
-                        width={450}
-                        height={400}
+                        className='w-full h-full object-cover bg-white'                   
                     />
 
                 </SwiperSlide>

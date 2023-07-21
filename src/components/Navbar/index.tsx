@@ -21,7 +21,7 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const router= useRouter()
-
+    const [selected, setSelected] = useState(1)
   let user: any
 
     useEffect(() => {
@@ -52,6 +52,10 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
 
   }
   
+  const handleClick = (id:any) => {
+    setSelected(id)
+  }
+
   return (
     <nav className='py-8 bg-darkblue text-white font-montserrat'>
         <div className='px-4 flex items-center justify-between relative md:px-2 md:container md:mx-auto'>
@@ -119,27 +123,27 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
 
         <div className="hidden md:block">
             <div className="px-4 mt-6 font-normal md:flex space-x-2 items-center justify-start sm:px-2 sm:container sm:mx-auto">
-                <Link href="/" className="flex py-2 px-4 rounded-full border-2 border-white gap-2 items-center justify-center">
+                <Link href="/" className={`flex py-2 px-4 rounded-full  gap-2 items-center justify-center ${selected === 1 ?'border-2 border-white':''}`} onClick={()=>handleClick(1)}>
                     <FontAwesomeIcon icon={faHotel} className="w-4 h-4" />
                     <span className="text-sm">Hotels</span>
                 </Link>
 
-                <Link href="/coming_soon" className="flex py-2 px-4 rounded-full border-white gap-2 items-center justify-center">
+                <Link href="/coming_soon" className={`flex py-2 px-4 rounded-full  gap-2 items-center justify-center ${selected === 2 ?'border-2 border-white':''}`} onClick={()=>handleClick(2)}>
                     <Flight/>
                     <span className="text-sm">Flights</span>
                 </Link> 
                 
-                <Link href="/coming_soon" className="flex py-2 px-4 rounded-full border-white gap-2 items-center justify-center">
+                <Link href="/coming_soon" className={`flex py-2 px-4 rounded-full  gap-2 items-center justify-center ${selected === 3 ?'border-2 border-white':''}`} onClick={()=>handleClick(3)}>
                     <Room/>
                     <span className="text-sm">Rooms</span>
                 </Link>
 
-                <Link href="/coming_soon" className="flex py-2 px-4 rounded-full border-white gap-2 items-center justify-center">
+                <Link href="/coming_soon" className={`flex py-2 px-4 rounded-full  gap-2 items-center justify-center ${selected === 4 ?'border-2 border-white':''}`} onClick={()=>handleClick(4)}>
                     <Flats/>
                     <span className="text-sm">Flats</span>
                 </Link>
 
-                <Link href="/coming_soon" className="flex py-2 px-4 rounded-full border-white gap-2 items-center justify-center">
+                <Link href="/coming_soon" className={`flex py-2 px-4 rounded-full  gap-2 items-center justify-center ${selected === 5 ?'border-2 border-white':''}`} onClick={()=>handleClick(5)}>
                     <FontAwesomeIcon icon={faHouseChimney} className="w-4 h-4" />
                     <span className="text-sm">Villas</span>
                 </Link>

@@ -123,7 +123,7 @@ const HotelPages = () => {
                     </aside>
                 </main>
                 {showGallery && (
-                    <GalleryModal setShowGallery={setShowGallery} hotelGallery={hotelGallery}/>
+                    <GalleryModal setShowGallery={setShowGallery} hotelGallery={hotelGallery} />
                 )}
 
                 <section className="md:container mx-auto px-5 md:px-12 flex flex-col gap-6">
@@ -156,71 +156,71 @@ const HotelPages = () => {
                     <h4 className="text-xl font-bold">Availability</h4>
 
                     {/* <ReserveAll  headers={headers}/> */}
-                    <Table headers={headers}  hotel={hotel}/>
+                    <Table headers={headers} hotel={hotel} />
 
-                     {rooms.map((room) => (
-                            <Row
-                                key="room._id"
-                                room={room}
-                                toggleRoomModal={toggleRoomModal}
-                            />
-                     ))}
-                        
-                        {rooms.map((room) => (
-                            <MobileRoomCard
-                                key="room._id"
-                                room={room}
-                                toggleRoomModal={toggleRoomModal}
-                            />
-                     ))}
-                    
+                    {rooms.map((room) => (
+                        <Row
+                            key="room._id"
+                            room={room}
+                            toggleRoomModal={toggleRoomModal}
+                        />
+                    ))}
 
-                        <MobileReserveAll hotel={hotel}/>
+                    {rooms.map((room) => (
+                        <MobileRoomCard
+                            key="room._id"
+                            room={room}
+                            toggleRoomModal={toggleRoomModal}
+                        />
+                    ))}
+
+
+                    <MobileReserveAll hotel={hotel} />
 
                 </section>
 
                 <div className="bg-white drop-shadow rounded-md mt-10 pb-5 md:container md:mx-auto pt-4 px-5 md:px-12">
-                        <div className=" flex flex-col sm:flex-row gap-4 sm:gap-8  justify-start text-left text-gray-400 py-5 px-6">
-                            {/* <button
+                    <div className=" flex flex-col sm:flex-row gap-4 sm:gap-8  justify-start text-left text-gray-400 py-5 px-6">
+                        {/* <button
                                 className={`   ${isColor === 1 ? "text-black" : "text-[#c2c2d3]"
                                     }`}
                                 onClick={() => handleChange(1)}
                             >
                                 DESCRIPTION
                             </button> */}
-                            {/* {data.additionalInformation?.length > 0 && ( */}
-                                <button
-                                    className={`  ${isColor === 2 ? "text-black" : "text-[#c2c2d3]"
-                                        }`}
-                                    onClick={() => handleChange(2)}
-                                >
-                                    ADDITIONAL INFORMATION
-                                </button>
-                            {/* )} */}
-                            <button
-                                className={`   ${isColor === 3 ? "text-black" : "text-[#c2c2d3]"
-                                    }`}
-                                onClick={() => handleChange(3)}
-                            >
-                                REVIEWS
-                                {/* ({approvedReviews.length}) */}
-                            </button>
-                        </div>
-                        <hr />
-                        <div className="mt-4 px-6">
-                            {isColor === 1 ? (
-                                <Description  />
-                            ) : isColor === 2 ? (
-                                <AdditionalInformation  hotel={hotel} />
-                            ) : (
-                                <Review  hotelId={hotelId} hotel={hotel}/>
-                            )}
-                        </div>
+                        {/* {data.additionalInformation?.length > 0 && ( */}
+                        <button
+                            className={`  ${isColor === 2 ? "text-black" : "text-[#c2c2d3]"
+                                }`}
+                            onClick={() => handleChange(2)}
+                        >
+                            ADDITIONAL INFORMATION
+                        </button>
+                        {/* )} */}
+                        <button
+                            className={`   ${isColor === 3 ? "text-black" : "text-[#c2c2d3]"
+                                }`}
+                            onClick={() => handleChange(3)}
+                        >
+                            REVIEWS
+                            {/* ({approvedReviews.length}) */}
+                        </button>
                     </div>
+                    <hr />
+                    <div className="mt-4 px-6">
+                        {isColor === 1 ? (
+                            <Description />
+                        ) : isColor === 2 ? (
+                            <AdditionalInformation hotel={hotel} />
+                        ) : (
+                            <Review hotelId={hotelId} hotel={hotel} />
+                        )}
+                    </div>
+                </div>
 
 
             </section>
-            
+
         </div >
     );
 }

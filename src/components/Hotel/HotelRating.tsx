@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 const HotelRating = ({hotel}:any) => {
+  console.log(hotel)
     const [isFav, setIsFav] = useState(false);
     return ( 
         <div className="w-full bg-gray-200 flex flex-col gap-4 rounded-lg shadow-md p-6 font-montserrat text-black">
