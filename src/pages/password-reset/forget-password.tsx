@@ -25,7 +25,7 @@ const ForgetPassword = () => {
             setTimeout(() => {
               router.push('/password-reset/check-mail');
             //   setLoading(false);
-            }, 3000);
+            }, 1000);
           } catch (error) {
                   setUserNotFoundError(true);
               console.error(error);

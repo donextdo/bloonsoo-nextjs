@@ -125,7 +125,7 @@ const Footer: React.FC = () => {
             &copy; 2023 Bloonsoo | All rights reserved
           </h4>
           <h4 className="text-sm md:text-base text-center font-semibold mb-5 md:mb-0 mx-1 text-blue-700">
-            Powered by Marriextransfer Private Limited
+            Powered by Marriex Private Limited
           </h4>
         </div>
 

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import baseUrl from "../../../Utils/baseUrl";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const PasswordReset = () => {
     const [password, setPassword] = useState('');
@@ -11,6 +12,9 @@ const PasswordReset = () => {
     const [passwordError, setPasswordError] = useState('');
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [formError, setFormError] = useState('');
+    const router = useRouter()
+  const { id } = router.query;
+
 
 
     const handlePasswordChange = (e: any) => {
@@ -46,7 +50,7 @@ const PasswordReset = () => {
                 try {
                     
                     const loginDto = {
-        
+                        token:id,
                         password: password
 
                     };
@@ -54,14 +58,6 @@ const PasswordReset = () => {
                     console.log(loginDto)
                     const response = await axios.post(`${baseUrl}/auth/reset-password`, loginDto)
 
-                    // const data = await $fetch(`${baseUrl}/api/auth/reset-password`, {
-                    //     method: 'POST',
-                    //     body: {
-                    //         token: id,
-                    //         password: password.value
-                    //     }
-                    
-                    // })
             
                     // setTimeout(() => {
                     //   loading.value = false
@@ -69,6 +65,9 @@ const PasswordReset = () => {
                     // }, 4000)
 
                     console.log(response)
+                    if(response.status==200){
+                        router.push("/")
+                    }
                     
                 } catch (error) {
                     console.log(error)
