@@ -52,7 +52,6 @@ const PasswordReset = () => {
                     const loginDto = {
                         token:id,
                         password: password
-
                     };
 
                     console.log(loginDto)

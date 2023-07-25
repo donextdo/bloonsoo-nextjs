@@ -104,7 +104,7 @@ const HotelPages = () => {
         <div>
             <section className="flex flex-col gap-14 bg-gray-50 text-black font-montserrat mb-8">
                 <main className="md:container md:mx-auto  md:px-2 pt-16 pb-6 grid  grid-cols-1 md:grid-cols-3 gap-5 w-full">
-                    <section className="w-full px-5  mb-5 md:mb-0 md:w-full md:col-span-2 ">
+                    <section className="w-full px-5  mb-5 md:mb-0  md:col-span-3 ">
 
                         <Gallery
                             hotelGallery={hotelGallery}
@@ -113,14 +113,18 @@ const HotelPages = () => {
 
                         <HotelDetails hotel={hotel} />
 
+                        <div className="mt-4">
+                        <HotelRating hotel={hotel} />
+                        </div>
+
                     </section>
-                    <aside className="w-full px-5 md:w-full md:col-span-1 h-full flex flex-col gap-4">
-                        {/* <HotelMap /> */}
+                    {/* <aside className="w-full px-5 md:w-full md:col-span-1 h-full flex flex-col gap-4">
+                        <HotelMap />
 
                         <HotelRating hotel={hotel} />
 
                         <HotelBlog />
-                    </aside>
+                    </aside> */}
                 </main>
                 {showGallery && (
                     <GalleryModal setShowGallery={setShowGallery} hotelGallery={hotelGallery} />

@@ -19,7 +19,7 @@ const HotelDetails = ({hotel}:any) => {
             <p className="text-sm text-gray-600">{hotel.property_address ? hotel.property_address.street_address : ''}, {hotel.property_address ? hotel.property_address.country : ''}</p>
           </div>
           <div className="md:flex items-center justify-center gap-6">
-            <button onClick={toggleFavorite}>
+            {/* <button onClick={toggleFavorite}>
               <FontAwesomeIcon
                 className={`text-red-500 text-xl md:text-3xl mx-5 md:mx-0`}
                 icon={isFav ? solidHeart : regularHeart}
@@ -27,7 +27,7 @@ const HotelDetails = ({hotel}:any) => {
             </button>
             <button>
               <FontAwesomeIcon className="text-xl md:text-3xl mx-5 md:mx-0" icon={faShareAlt} />
-            </button>
+            </button> */}
             <a
               href="#rooms-area"
               className="py-2 md:py-3 px-7 md:px-10 rounded-full w-max gradient-btn mx-5 md:mx-0"

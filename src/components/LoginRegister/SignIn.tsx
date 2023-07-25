@@ -88,6 +88,8 @@ const SignIn = () => {
 
                 localStorage.setItem('token', user.token);
                 localStorage.setItem('user', JSON.stringify(user.userInfo));
+                localStorage.setItem('email', JSON.stringify(user.userInfo.email));
+
 
                 //   await authStore.getAuthUser();
 
