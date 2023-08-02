@@ -1,16 +1,83 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as solidHeart, faShareAlt, faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faBuilding, faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
+import { useRouter } from 'next/router';
+import baseUrl from '../../../Utils/baseUrl';
+import axios from 'axios';
+import siteUrl from '../../../Utils/siteUrl';
 
 
 const HotelDetails = ({hotel}:any) => {
-
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isFav, setIsFav] = useState(false);
+  const [user, setUser] = useState({})
+
+  const router = useRouter()
+
 
     const toggleFavorite = () => {
       setIsFav(!isFav);
     };
+
+    useEffect(() => {
+      const userString = localStorage.getItem('user');
+      const userArray = userString ? JSON.parse(userString) : [];
+      if (userArray) {
+        setIsLoggedIn(true);
+      }
+    setUser(userArray._id)
+    }, []);
+
+    const handleWishlist = async (hotel: any) => {
+      console.log(hotel)
+  
+      if (isLoggedIn) {
+        setIsFav(!isFav)
+  
+        const whishListObj = {
+          whishList: [
+            {
+              hotelId: hotel._id,
+              image: hotel.cover_image,
+              title: hotel.property_name,
+              address: hotel.property_address.street_address,
+            },
+          ],
+        };
+  
+        try {
+          const response = await axios.post(
+            `${baseUrl}/user/wishList/${user}`,
+            whishListObj,
+  
+          );
+  
+          console.log(response.data); // do something with the response data
+        } catch (error) {
+          console.log(error); // handle the error 
+  
+          // alert("Session expired")
+          // router.push("/signin");
+        }
+      } else {
+        router.push("/signin");
+      }
+  
+    }
+
+    const encodedUrl = encodeURIComponent(`${siteUrl}/hotels/${hotel._id}`);
+  const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+
+  const facebookShareClick = (e: any) => {
+    e.preventDefault();
+    window.open(
+      facebookShareUrl,
+      "facebook-share-dialog",
+      "width=626,height=436"
+    );
+  };
+
     return (
         <div className="md:w-full px-4 md:px-8 py-8 bg-white rounded-lg shadow-lg flex flex-col gap-6">
         <div className="md:flex md:items-center md:justify-between">
@@ -19,15 +86,22 @@ const HotelDetails = ({hotel}:any) => {
             <p className="text-sm text-gray-600">{hotel.property_address ? hotel.property_address.street_address : ''}, {hotel.property_address ? hotel.property_address.country : ''}</p>
           </div>
           <div className="md:flex items-center justify-center gap-6">
-            {/* <button onClick={toggleFavorite}>
+            <button onClick={()=>handleWishlist(hotel)}>
               <FontAwesomeIcon
                 className={`text-red-500 text-xl md:text-3xl mx-5 md:mx-0`}
                 icon={isFav ? solidHeart : regularHeart}
               />
             </button>
             <button>
-              <FontAwesomeIcon className="text-xl md:text-3xl mx-5 md:mx-0" icon={faShareAlt} />
-            </button> */}
+              <a
+                href={facebookShareUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={facebookShareClick}
+              >
+                <FontAwesomeIcon className="text-xl md:text-3xl mx-5 md:mx-0" icon={faShareAlt} />
+              </a>
+            </button>
             <a
               href="#rooms-area"
               className="py-2 md:py-3 px-7 md:px-10 rounded-full w-max gradient-btn mx-5 md:mx-0"

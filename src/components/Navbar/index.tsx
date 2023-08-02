@@ -159,9 +159,9 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
                             <Link href="/wishlist">Wishlist</Link>
                         </li>
 
-                        {/* <li className="w-full border-b border-gray-300 py-1">
-                        <Link href="#">Rental Guides</Link>
-                        </li> */}
+                        <li className="w-full border-b border-gray-300 py-1">
+                        <Link href="/account">Account</Link>
+                        </li>
 
                         {/* <li className="w-full border-b border-gray-300 py-1">
                         <Link href="#">About us</Link>
