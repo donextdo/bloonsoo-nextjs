@@ -27,7 +27,7 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
 
 
     let user: any
-   
+
 
     useEffect(() => {
         if (typeof localStorage !== 'undefined') {
@@ -38,16 +38,16 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
             setIsLoggedIn(true);
         }
 
-       
+
     }, []);
 
 
     useEffect(() => {
-      const storedEmail = localStorage.getItem('email');
-      if (storedEmail) {
-        const email = JSON.parse(storedEmail) ;
-        setUserEmail(email);
-      }
+        const storedEmail = localStorage.getItem('email');
+        if (storedEmail) {
+            const email = JSON.parse(storedEmail);
+            setUserEmail(email);
+        }
     }, []);
 
     const containerClasses = classNames('relative', 'mx-auto', 'flex', 'flex-col', 'justify-center', 'sm:container', 'px-20', {
@@ -76,8 +76,8 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
         setMenu(!menu);
     };
 
-    let initials:any
-    if(userEmail){
+    let initials: any
+    if (userEmail) {
         initials = userEmail?.charAt(0).toUpperCase()
     }
     return (
@@ -154,14 +154,17 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
                                 <Link href="/profile">Profile</Link>
                             </li>
                         )} */}
+                        {isLoggedIn && (
+                            <li className="w-full border-b border-gray-300 py-1">
+                                <Link href="/wishlist">Wishlist</Link>
+                            </li>
+                        )}
 
-                        <li className="w-full border-b border-gray-300 py-1">
-                            <Link href="/wishlist">Wishlist</Link>
-                        </li>
-
-                        <li className="w-full border-b border-gray-300 py-1">
-                        <Link href="/account">Account</Link>
-                        </li>
+                        {isLoggedIn && (
+                            <li className="w-full border-b border-gray-300 py-1">
+                                <Link href="/account">Account</Link>
+                            </li>
+                        )}
 
                         {/* <li className="w-full border-b border-gray-300 py-1">
                         <Link href="#">About us</Link>
@@ -176,7 +179,7 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
                                 <div className='mt-1'>
                                     <Link className="px-6 py-2  bg-[#feaa0f] rounded-full" href='/signin'>Login</Link>
                                 </div>
-                               
+
                                 <div className='mt-5'>
                                     <Link className="px-6 py-2 bg-[#feaa0f] rounded-full " href='/register'>Register</Link>
                                 </div>

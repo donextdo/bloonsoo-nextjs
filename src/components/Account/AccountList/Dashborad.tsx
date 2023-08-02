@@ -58,8 +58,8 @@ const Dashboard = ({onButtonClick, handleAddressClick, handlePasswordClick, hand
   };
 
 
-const username = userData.email.split("@")[0]; // Extract the username from the email
- const extractedUsername = username.replace(/"/g, "");
+const username = userData?.email.split("@")[0]; // Extract the username from the email
+ const extractedUsername = username?.replace(/"/g, "");
  
   return (
     <div>
