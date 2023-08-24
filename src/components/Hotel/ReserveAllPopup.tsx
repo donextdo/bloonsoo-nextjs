@@ -130,6 +130,20 @@ const ReserveAllPopup = ({ propertyName, propertyAddress, policies, handleResAll
             * This price is converted to show you the approximate cost in LKR. You&apos;ll pay in US$ or LKR. The exchange rate might change before you pay.
           </p>
           <p className="text-sm">Keep in mind that your card issuer may charge you a foreign transaction fee.</p>
+          <div className="inline-flex gap-2 w-full">
+                    <input
+                      type="text"
+                      className="h-11 bg-gray-100 rounded-md px-4 text-sm w-full md:w-72"
+                      placeholder="Coupon code"
+                    //   onChange={(e) => setCoupon(e.target.value)}
+                    />
+                    <button
+                      className="bg-[#1d4ed8] text-white py-2.5 px-4 rounded-md text-xs h-11 w-40"
+                    //   onClick={handlecoupon}
+                    >
+                      Apply coupon
+                    </button>
+                  </div>
           <button onClick={handleSubmit} className="mt-4 w-2/3 mx-auto py-3 btn-accent">
             Continue Booking
           </button>

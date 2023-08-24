@@ -12,6 +12,7 @@ import Img2 from '../assets/cta/cta_image2.jpg'
 import Img3 from '../assets/cta/cta_image3.jpg'
 import Hotels from '@/components/Hotels'
 import MyComponent from '@/components/Featured'
+import NewsList from '@/components/News/NewsList'
 
 
 
@@ -70,8 +71,10 @@ export default function Home() {
 
       <Testimonials />
 
+      <NewsList />
+
       
-        <Image src={Img3} loading="lazy" className="w-full h-full object-cover" alt="" />
+        <Image src={Img3} loading="lazy" className="w-full h-full object-cover mt-8" alt="" />
 
       
 

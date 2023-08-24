@@ -10,6 +10,7 @@ import { faHouseChimney, faHotel, faBars, faTimes, faUser } from '@fortawesome/f
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router'
+import Currency from '../Currency/Currency'
 
 
 
@@ -24,6 +25,8 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
     const [selected, setSelected] = useState(1)
     const [menu, setMenu] = useState(false);
     const [userEmail, setUserEmail] = useState<any>(null);
+    const [isOpenCurrency, setIsOpenCurrency] = useState(false);
+    const [selectedCurrency, setSelectedCurrency] = useState("EUR")
 
 
     let user: any
@@ -89,7 +92,19 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
 
                 <div className="flex gap-5">
 
-                    <div className="flex gap-2">
+                    <div className="flex items-center gap-2">
+
+                    <div
+                            className="relative flex flex-col items-center"
+                            onMouseEnter={() => setIsOpenCurrency(true)}
+                            onMouseLeave={() => setIsOpenCurrency(false)}
+                        >
+                            <button className=" text-xs py-3 px-3  md:px-6 bg-white text-black rounded-full border-2 border-[#1d4ed8]">{selectedCurrency}</button>
+
+                            {isOpenCurrency && <Currency setSelectedCurrency={setSelectedCurrency}/>}
+
+                        </div>
+
                         {isLoggedIn ? (
                             <div className='flex gap-2'>
                                 <Link href='/listing' className="py-2 px-3 md:py-2 md:px-6 rounded-full gradient-btn">Become A Host</Link>
@@ -98,6 +113,8 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
                             </div>
 
                         ) : null}
+
+                        
 
                         <button
                             onClick={toggleMenu}
@@ -127,6 +144,8 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
                                     )}
                             </div>
                         </button>
+
+                       
                     </div>
 
                     {/* {isLoggedIn ? (
@@ -149,11 +168,7 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
                         transition-all duration-300 origin-top ${menu ? 'scale-y-100' : 'scale-y-0'}`}
                 >
                     <ul className="w-full flex flex-col gap-2 text-sm font-semibold text-gray-600">
-                        {/* {isLoggedIn && (
-                            <li className="w-full border-b border-gray-300 py-1">
-                                <Link href="/profile">Profile</Link>
-                            </li>
-                        )} */}
+                        
                         {isLoggedIn && (
                             <li className="w-full border-b border-gray-300 py-1">
                                 <Link href="/wishlist">Wishlist</Link>

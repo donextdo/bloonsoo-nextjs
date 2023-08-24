@@ -177,7 +177,21 @@ const HotelPages = () => {
                             toggleRoomModal={toggleRoomModal}
                         />
                     ))}
-
+                    
+                    <div className="inline-flex gap-2 w-full">
+                    <input
+                      type="text"
+                      className="h-11 bg-gray-100 rounded-md px-4 text-sm w-full md:w-72"
+                      placeholder="Coupon code"
+                    //   onChange={(e) => setCoupon(e.target.value)}
+                    />
+                    <button
+                      className="bg-[#1d4ed8] text-white py-2.5 px-4 rounded-md text-xs h-11 w-40"
+                    //   onClick={handlecoupon}
+                    >
+                      Apply coupon
+                    </button>
+                  </div>
 
                     <MobileReserveAll hotel={hotel} />
 
@@ -230,3 +244,25 @@ const HotelPages = () => {
 }
 
 export default HotelPages;
+
+
+// export const getServerSideProps = async ({ query }:any) => {
+//     const { hotelId } = query;
+
+//     let hotel = null;
+//     try {
+//       const response = await fetch(`${baseUrl}/hotel/${hotelId}`);
+//       if (!response.ok) {
+//         throw new Error('Failed to fetch data from the API');
+//       }
+//       hotel = await response.json();
+//     } catch (error) {
+//       console.error(error);
+//     }
+  
+//     return {
+//       props: {
+//         hotel,
+//       },
+//     };
+//   };
