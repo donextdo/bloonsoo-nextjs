@@ -277,7 +277,7 @@ const Register = () => {
                         {formError && <div className='text-red-500'>{formError}</div>}
 
                         <p className="text-sm text-gray-700 font-medium">
-                            Already have an account? <Link href="/login" className="text-[#3A1C61]">Sign In</Link>
+                            Already have an account? <Link href="/signin" className="text-[#3A1C61]">Sign In</Link>
                         </p>
                     </div>
                 

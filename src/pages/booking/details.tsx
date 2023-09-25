@@ -22,6 +22,7 @@ import axios from "axios";
 import baseUrl from "../../../Utils/baseUrl";
 import { saveFirstPage } from "@/components/Hotel/bookingSlice";
 import BookingDetailsCard from "@/components/Booking/BookingDetailsCard";
+import useCurrency from "@/components/Hooks/useCurrencyHook";
 
 const BookingDetailsPage = () => {
     const [hotel, setHotel] = useState([]);
@@ -39,6 +40,8 @@ const BookingDetailsPage = () => {
     const [showSetNameAsProfileName, setShowSetNameAsProfileName] = useState(false);
     const [arrivalTime, setArrivalTime] = useState('9:00 AM — 10:00 AM');
     const router = useRouter();
+    const { getPrice } = useCurrency();
+
 
     const fullGuestName = `${firstName} ${lastName}`;
     const [fullGuestNameError, setFullGuestNameError] = useState(false);
@@ -499,7 +502,7 @@ const BookingDetailsPage = () => {
                             </div>
 
                             <div>
-                                <p className=" float-right text-gray-600 text-sm md:text-base"> LKR 4900</p>
+                                <p className=" float-right text-gray-600 text-sm md:text-base"> {getPrice(49)}</p>
                             </div>
 
                         </div>

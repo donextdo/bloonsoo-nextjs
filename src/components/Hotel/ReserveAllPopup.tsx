@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import LoginPopup from '../Auth/LoginPopup/LoginPopup';
 import { setHotelId } from './bookingSlice';
+import useCurrency from '../Hooks/useCurrencyHook';
 
 
 const ReserveAllPopup = ({ propertyName, propertyAddress, policies, handleResAllClick, setReserveAllShow, setAuthPopup, hotelId }: any) => {
@@ -15,6 +16,7 @@ const ReserveAllPopup = ({ propertyName, propertyAddress, policies, handleResAll
   const totalPrice = useSelector((state: RootState) => state.booking.totalAmount);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter()
+  const { getPrice } = useCurrency();
 
   const dispatch = useDispatch();
 
@@ -114,14 +116,14 @@ const ReserveAllPopup = ({ propertyName, propertyAddress, policies, handleResAll
             </div>
             <div className="flex items-center justify-between pb-5 gap-2 border-b border-gray-400">
               <h3 className="text-base md:text-lg font-bold">Price</h3>
-              <h3 className="text-base md:text-lg font-bold">USD {book.totalPrice}</h3>
+              <h3 className="text-base md:text-lg font-bold">{getPrice(book.totalPrice)}</h3>
             </div>
           </section>
         ))}
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between">
             <h3 className="text-base md:text-lg font-bold">Total Price</h3>
-            <h3 className="text-base md:text-lg font-bold">USD {totalPrice}</h3>
+            <h3 className="text-base md:text-lg font-bold">{getPrice(totalPrice)}</h3>
           </div>
           <p className="text-sm">
             TAX (2.50%) not included VAT (15%) not included Property service charge (10%) not included City tax (1.01%)
@@ -130,6 +132,20 @@ const ReserveAllPopup = ({ propertyName, propertyAddress, policies, handleResAll
             * This price is converted to show you the approximate cost in LKR. You&apos;ll pay in US$ or LKR. The exchange rate might change before you pay.
           </p>
           <p className="text-sm">Keep in mind that your card issuer may charge you a foreign transaction fee.</p>
+          <div className="inline-flex gap-2 w-full">
+                    <input
+                      type="text"
+                      className="h-11 bg-gray-100 rounded-md px-4 text-sm w-full md:w-72"
+                      placeholder="Coupon code"
+                    //   onChange={(e) => setCoupon(e.target.value)}
+                    />
+                    <button
+                      className="bg-[#1d4ed8] text-white py-2.5 px-4 rounded-md text-xs h-11 w-40"
+                    //   onClick={handlecoupon}
+                    >
+                      Apply coupon
+                    </button>
+                  </div>
           <button onClick={handleSubmit} className="mt-4 w-2/3 mx-auto py-3 btn-accent">
             Continue Booking
           </button>

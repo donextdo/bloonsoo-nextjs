@@ -15,7 +15,6 @@ const ImagePage = () => {
     const [preview, setPreview] = useState('');
     const [images, setImages] = useState(null);
     const [previews, setPreviews] = useState<any[]>([]);
-
     const router = useRouter();
 
     const { hotelId } = router.query;

@@ -1,12 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import bookingReducer from "../src/components/Hotel/bookingSlice" 
-
-
+import currencyReducer from "../src/components/Currency/currencySlice"
+import siteDataReducer from "../src/components/Currency/siteDataSlice"
 
 export const store = configureStore({
   reducer: {
-    booking : bookingReducer
-    
+    booking : bookingReducer,
+    currencychange : currencyReducer,
+    siteData : siteDataReducer
   },
 });
 

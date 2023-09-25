@@ -328,7 +328,7 @@ const PaymentPage = () => {
                         <label htmlFor="default-checkbox" className="ml-2 text-sm"
                         >I certify that this is a legitimate accommodation business with all
                             necessary licenses and permits, which can be shown upon first
-                            request. Booking.com B.V. reserves the right to verify and
+                            request. Bloonsoo.com B.V. reserves the right to verify and
                             investigate any details provided in this registration.
                         </label>
                     </div>
@@ -341,9 +341,9 @@ const PaymentPage = () => {
                         />
                         <label htmlFor="default-checkbox" className="ml-2 text-sm"
                         >I have react accepted and agreed to the General Delivery Terms and
-                            Privacy Statement. Booking.com enables accommodations and guests to
+                            Privacy Statement. Bloonsoo.com enables accommodations and guests to
                             communicate through Etooking.com, which receives and processes
-                            communications in accordance with the Booking.com Privacy Statement
+                            communications in accordance with the Bloonsoo.com Privacy Statement
                             and General Delivery Terms.
                         </label>
                     </div>

@@ -54,7 +54,7 @@ const Review = ({ hotelId, hotel }: any) => {
   },[]);
 
 
-    const firstLetter = userEmail.charAt(0);
+    const firstLetter = userEmail?.charAt(0);
 
     useEffect(() => {
         fetchData();

@@ -21,7 +21,7 @@ const handleClose = () => {
                         You need to sign in before booking
                     </h4>
 
-                    <Link href="/login"
+                    <Link href="/signin"
                         className="rounded-full flex items-center justify-center py-2 w-24 gradient-btn col-span-2 mt-2 ml-auto">
                         Sign in
                     </Link>

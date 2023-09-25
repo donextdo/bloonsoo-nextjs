@@ -1,8 +1,11 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../../stores/store";
+import useCurrency from "../Hooks/useCurrencyHook";
 
 const BookingPriceCard = () => {
   const totalPrice = useSelector((state: RootState) => state.booking.totalAmount);
+  const { getPrice } = useCurrency();
+
 
     return (  
         <div className="shadow-md rounded-lg bg-white w-full px-5 py-8">
@@ -12,7 +15,7 @@ const BookingPriceCard = () => {
             {/* <p className="text-gray-500 text-sm">( your currency )</p> */}
           </div>
           <div>
-            <p className="font-semibold text-base md:text-lg text-gray-700 float-right">{totalPrice}</p>
+            <p className="font-semibold text-base md:text-lg text-gray-700 float-right">{getPrice(totalPrice)}</p>
           </div>
         </div>
   
@@ -23,7 +26,7 @@ const BookingPriceCard = () => {
             </div>
   
             <div>
-              <p className="font-medium text-sm md:text-base">{totalPrice}</p>
+              <p className="font-medium text-sm md:text-base">{getPrice(totalPrice)}</p>
             </div>
           </div>
   

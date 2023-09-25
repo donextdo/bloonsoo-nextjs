@@ -3,12 +3,14 @@ import { RootState } from "../../../stores/store";
 import { useState } from "react";
 import ReserveAllPopup from "./ReserveAllPopup";
 import LoginPopup from "../Auth/LoginPopup/LoginPopup";
+import useCurrency from "../Hooks/useCurrencyHook";
 
 const Table = ({ headers, hotel}: any) => {
   const booking = useSelector((state: RootState) => state.booking.items);
   const totalAmount = useSelector((state: RootState) => state.booking.totalAmount);
   const [reserveAllShow, setReserveAllShow] = useState(false)
   const [authPopup, setAuthPopup] = useState(false);
+  const { getPrice } = useCurrency();
 
 
   const handleResAllClick = () => {
@@ -40,7 +42,7 @@ const Table = ({ headers, hotel}: any) => {
             <h3>{headers[5] ? headers[5] : ''}</h3>
           ) : (
             <div className="flex flex-col items-center gap-3 mx-auto">
-              <h3 className="text-sm">TOTAL: {totalAmount}</h3>
+              <h3 className="text-sm">TOTAL: {getPrice(totalAmount)}</h3>
               <button onClick={handleResAllClick} className="px-6 py-1 gradient-btn rounded-full">
                 Reserve All
               </button>
