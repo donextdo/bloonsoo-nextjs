@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import LoginPopup from '../Auth/LoginPopup/LoginPopup';
 import { setHotelId } from './bookingSlice';
+import useCurrency from '../Hooks/useCurrencyHook';
 
 
 const ReserveAllPopup = ({ propertyName, propertyAddress, policies, handleResAllClick, setReserveAllShow, setAuthPopup, hotelId }: any) => {
@@ -15,6 +16,7 @@ const ReserveAllPopup = ({ propertyName, propertyAddress, policies, handleResAll
   const totalPrice = useSelector((state: RootState) => state.booking.totalAmount);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter()
+  const { getPrice } = useCurrency();
 
   const dispatch = useDispatch();
 
@@ -114,14 +116,14 @@ const ReserveAllPopup = ({ propertyName, propertyAddress, policies, handleResAll
             </div>
             <div className="flex items-center justify-between pb-5 gap-2 border-b border-gray-400">
               <h3 className="text-base md:text-lg font-bold">Price</h3>
-              <h3 className="text-base md:text-lg font-bold">USD {book.totalPrice}</h3>
+              <h3 className="text-base md:text-lg font-bold">{getPrice(book.totalPrice)}</h3>
             </div>
           </section>
         ))}
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between">
             <h3 className="text-base md:text-lg font-bold">Total Price</h3>
-            <h3 className="text-base md:text-lg font-bold">USD {totalPrice}</h3>
+            <h3 className="text-base md:text-lg font-bold">{getPrice(totalPrice)}</h3>
           </div>
           <p className="text-sm">
             TAX (2.50%) not included VAT (15%) not included Property service charge (10%) not included City tax (1.01%)

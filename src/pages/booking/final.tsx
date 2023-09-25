@@ -14,6 +14,7 @@ import baseUrl from "../../../Utils/baseUrl";
 import BookingDetailsCard from "@/components/Booking/BookingDetailsCard";
 import { saveSecondPage } from "@/components/Hotel/bookingSlice";
 import { useRouter } from "next/router";
+import useCurrency from "@/components/Hooks/useCurrencyHook";
 
 const BookingFinalPage = () => {
     const [loading, setLoading] = useState(false);
@@ -33,6 +34,8 @@ const BookingFinalPage = () => {
     const [code, setCode] = useState(42);
     const options = [13, 23, 42, 33, 5, 56, 64];
     const router = useRouter()
+    const { getPrice } = useCurrency();
+
 
     const hotelId = useSelector((state: RootState) => state.booking.hotelId);
     const bookings = useSelector((state: RootState) => state.booking.items);
@@ -452,7 +455,7 @@ const BookingFinalPage = () => {
                         </div>
 
                         <div>
-                            <p className=" float-right text-gray-600 text-sm md:text-base"> LKR 4900</p>
+                            <p className=" float-right text-gray-600 text-sm md:text-base"> {getPrice(49)}</p>
                         </div>
 
                     </div>

@@ -9,6 +9,7 @@ import siteUrl from '../../../Utils/siteUrl';
 import { FacebookShareButton, FacebookIcon } from 'react-share'
 import { Helmet } from 'react-helmet';
 import Head from 'next/head';
+import { FaFacebookF } from 'react-icons/fa';
 
 
 const HotelDetails = ({ hotel }: any) => {
@@ -83,19 +84,7 @@ const HotelDetails = ({ hotel }: any) => {
 
   return (
     <div className="md:w-full px-4 md:px-8 py-8 bg-white rounded-lg shadow-lg flex flex-col gap-6">
-      {/* <Head>
-        <title>Social Media Preview</title>
-        <meta property="og:url" content="your url" />
-        <meta property="og:type" content="website" />
-        <meta property="fb:app_id" content="your fb id" />
-        <meta property="og:title" content={hotel?.title} />
-        <meta name="twitter:card" content="summary" />
-        <meta
-          property="og:description"
-          content="Hurray!! Yes Social Media Preview is Working"
-        />
-        <meta property="og:image" content={hotel?.cover_image} />
-      </Head> */}
+     
       <div className="md:flex md:items-center md:justify-between">
         <div className="flex flex-col gap-5 md:gap-10 mb-12 md:mb-0">
           <h2 className="text-lg md:text-2xl font-bold">{hotel.property_name ? hotel.property_name : ''}</h2>
@@ -108,28 +97,24 @@ const HotelDetails = ({ hotel }: any) => {
               icon={isFav ? solidHeart : regularHeart}
             />
           </button>
-          {/* <button>
+          <button>
               <a
                 href={facebookShareUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={facebookShareClick}
               >
-                <FontAwesomeIcon className="text-xl md:text-3xl mx-5 md:mx-0" icon={faShareAlt} />
+                <div
+                        className="h-[34px] w-[34px] rounded-full bg-blue-700 flex items-center justify-center">
+                        <FaFacebookF className="text-white"></FaFacebookF>
+                    </div>
               </a>
-            </button> */}
-          <div>
-            {/* <Helmet>
-              <meta property="og:title" content="Your Page Title" />
-              <meta property="og:description" content="Your Page Description" />
-              <meta property="og:image" content="https://www.google.com/url?sa=i&url=https%3A%2F%2Feduindex.org%2F2021%2F07%2F31%2Fanime-the-global-fandom%2F&psig=AOvVaw2iAEx5Z8XyjV9zjEa_6NHH&ust=1691045455143000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCPi7ia-xvYADFQAAAAAdAAAAABAE" />
-              <meta property="og:url" content={facebookShareUrl} />
-              <meta property="og:type" content="website" />
-            </Helmet> */}
+            </button>
+          {/* <div>
             <FacebookShareButton url={facebookShareUrl}>
               <FacebookIcon size={35} round={true} />
             </FacebookShareButton>
-          </div>
+          </div> */}
           <a
             href="#rooms-area"
             className="py-2 md:py-3 px-7 md:px-10 rounded-full w-max gradient-btn mx-5 md:mx-0"

@@ -2,9 +2,11 @@ import { useState } from 'react'
 import { BookingStatus, BookingStatusColor } from '../../../Utils/constants/bookingContants'
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import useCurrency from '../Hooks/useCurrencyHook'
 
 const BookinCard = ({ booking }: any) => {
   const [expand, setExpand] = useState(false)
+  const { getPrice } = useCurrency();
 
   const getColor = (status: any) => {
     if (status == 0) {
@@ -35,7 +37,7 @@ const BookinCard = ({ booking }: any) => {
           {booking?.status === 0 ? 'Pending' : booking?.status === 1 ? 'Approved' : 'Cancelled'}
         </span>
 
-        <h3 className="text-sm md:text-lg font-bold ml-auto">Total Price: {booking.total}</h3>
+        <h3 className="text-sm md:text-lg font-bold ml-auto">Total Price: {getPrice(booking.total)}</h3>
       </div>
 
       {booking.booked_rooms.map((room: any, index: number) => (
@@ -73,7 +75,7 @@ const BookinCard = ({ booking }: any) => {
 
           <div className="flex items-center justify-between pb-5 gap-2 border-b border-gray-400">
             <h3 className="text-sm md:text-lg font-bold">Price</h3>
-            <h3 className="text-sm md:text-lg font-bold">{room.total}</h3>
+            <h3 className="text-sm md:text-lg font-bold">{getPrice(room.total)}</h3>
           </div>
         </section>
       ))}

@@ -26,7 +26,7 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
     const [menu, setMenu] = useState(false);
     const [userEmail, setUserEmail] = useState<any>(null);
     const [isOpenCurrency, setIsOpenCurrency] = useState(false);
-    const [selectedCurrency, setSelectedCurrency] = useState("EUR")
+    const [selectedCurrency, setSelectedCurrency] = useState("USD")
 
 
     let user: any
@@ -52,6 +52,17 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
             setUserEmail(email);
         }
     }, []);
+
+    useEffect(()=>{
+        if (typeof sessionStorage !== 'undefined') {
+            const sessionCurrency = sessionStorage.getItem("currency");
+            if (sessionCurrency !== null) {
+                setSelectedCurrency(sessionCurrency);
+           } else {
+            setSelectedCurrency("USD");
+           }
+         }     
+    },[])
 
     const containerClasses = classNames('relative', 'mx-auto', 'flex', 'flex-col', 'justify-center', 'sm:container', 'px-20', {
         'h-32': short,
