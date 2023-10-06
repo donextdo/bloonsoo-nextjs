@@ -100,7 +100,7 @@ const Row = ({ room, toggleRoomModal }: any) => {
 
                         <h4 className="text-base text-gray-800 font-semibold">
                             {room.is_breakfast_available
-                                ? `Breakfast Available ${room.breakfast_price}`
+                                ? `Breakfast Available ${getPrice(parseFloat(room.breakfast_price.slice(4)))}`
                                 : 'Breakfast not available'}
                         </h4>
                     </div>
