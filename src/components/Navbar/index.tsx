@@ -11,6 +11,8 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router'
 import Currency from '../Currency/Currency'
+import lk from '../../../assets/country/sl.png'
+import usa from '../../../assets/country/usa.png'
 
 
 
@@ -27,6 +29,7 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
     const [userEmail, setUserEmail] = useState<any>(null);
     const [isOpenCurrency, setIsOpenCurrency] = useState(false);
     const [selectedCurrency, setSelectedCurrency] = useState("USD")
+
 
 
     let user: any
@@ -53,16 +56,16 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
         }
     }, []);
 
-    useEffect(()=>{
+    useEffect(() => {
         if (typeof sessionStorage !== 'undefined') {
             const sessionCurrency = sessionStorage.getItem("currency");
             if (sessionCurrency !== null) {
                 setSelectedCurrency(sessionCurrency);
-           } else {
-            setSelectedCurrency("USD");
-           }
-         }     
-    },[])
+            } else {
+                setSelectedCurrency("USD");
+            }
+        }
+    }, [])
 
     const containerClasses = classNames('relative', 'mx-auto', 'flex', 'flex-col', 'justify-center', 'sm:container', 'px-20', {
         'h-32': short,
@@ -105,14 +108,18 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
 
                     <div className="flex items-center gap-2">
 
-                    <div
+                        <div
                             className="relative flex flex-col items-center"
                             onMouseEnter={() => setIsOpenCurrency(true)}
                             onMouseLeave={() => setIsOpenCurrency(false)}
                         >
-                            <button className=" text-xs py-3 px-3  md:px-6 bg-white text-black rounded-full border-2 border-[#1d4ed8]">{selectedCurrency}</button>
+                            {/* <button className=" text-xs py-3 px-3  md:px-6 bg-white text-black rounded-full border-2 border-[#1d4ed8]">{selectedCurrency}</button> */}
+                            <div className='flex gap-4 text-xs py-3 px-3  md:px-6 bg-white text-black rounded-full border-2 border-[#1d4ed8] cursor-pointer'>
+                                <Image src={selectedCurrency === "USD" ? usa : lk } alt='lkr' className='object-cover h-6 w-6' />
+                                <button className="text-xs text-black hover:text-primary" >{selectedCurrency}</button>
+                            </div>
 
-                            {isOpenCurrency && <Currency setSelectedCurrency={setSelectedCurrency}/>}
+                            {isOpenCurrency && <Currency setSelectedCurrency={setSelectedCurrency} />}
 
                         </div>
 
@@ -125,7 +132,7 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
 
                         ) : null}
 
-                        
+
 
                         <button
                             onClick={toggleMenu}
@@ -156,7 +163,7 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
                             </div>
                         </button>
 
-                       
+
                     </div>
 
                     {/* {isLoggedIn ? (
@@ -179,7 +186,7 @@ const Navbar: React.FC<NavbarProps> = ({ short }) => {
                         transition-all duration-300 origin-top ${menu ? 'scale-y-100' : 'scale-y-0'}`}
                 >
                     <ul className="w-full flex flex-col gap-2 text-sm font-semibold text-gray-600">
-                        
+
                         {isLoggedIn && (
                             <li className="w-full border-b border-gray-300 py-1">
                                 <Link href="/wishlist">Wishlist</Link>
