@@ -22,7 +22,7 @@ const AddRoomPage = () => {
     const [nbrOfRooms, setNbrOfRooms] = useState(0);
     const [nbrOfRoomsError, setNbrOfRoomsError] = useState(false);
 
-    const [bedType, setBedType] = useState('0');
+    const [bedType, setBedType] = useState('');
     const [bedTypeError, setBedTypeError] = useState(false);
 
     const [noOfBeds, setNoOfBeds] = useState(0);
@@ -121,13 +121,11 @@ const AddRoomPage = () => {
     };
 
     const addAnotherBedFunc = () => {
-        setBedType('0');
-        setNoOfBeds(0);
-
+       
         setAddAnotherBed(true);
     };
 
-    const onMultipleChange = async (event: any) => {
+    const  onMultipleChange = async (event: any) => {
         const input = event.target;
         console.log(input)
         if (input.files) {
@@ -241,6 +239,7 @@ const AddRoomPage = () => {
         }
 
     };
+    console.log(beds)
     return (
         <section className="md:container mx-auto px-10 py-16 flex flex-col gap-8 text-black font-montserrat">
             <h2 className="text-2xl font-semibold mb-6">
@@ -286,7 +285,7 @@ const AddRoomPage = () => {
                             </select>
                             <FontAwesomeIcon icon={faCaretDown} className="text-gray-600 text-lg absolute right-4 top-0 bottom-0 my-auto cursor-pointer pointer-events-none" />
                         </div>
-                        
+
                         {roomTypeError && <p>Please select room type</p>}
                     </div>
 
@@ -349,16 +348,13 @@ const AddRoomPage = () => {
                             What kind of beds are available in this room?
                         </h4>
 
-                        {beds.length > 0 && (
-                            <div className="grid grid-cols-12 gap-x-8 items-end">
-
-
-                                <div className="flex flex-col gap-2 col-span-6 ">
+                        {beds.length > 0 && beds.map((bed, index) => (
+                            <div key={index} className="grid grid-cols-12 gap-x-8 items-end">
+                                <div className="flex flex-col gap-2 col-span-6">
                                     <div className="w-full h-max relative">
-
                                         <select
-                                            id="roomType"
-                                            value={bedType}
+                                            id={`roomType-${index}`}
+                                            value={bed.bed_type}
                                             onChange={(event) => setBedType(event.target.value)}
                                             className="w-full px-6 py-2 border bg-white border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none appearance-none"
                                         >
@@ -369,47 +365,45 @@ const AddRoomPage = () => {
                                                 'Extra-large double bed (Super-king size) / 181-210 cm wide',
                                                 'Bunk bed / variable Size',
                                                 'Sofa bed / variable Size',
-                                                'Futon Mat / variable Size'
-                                            ].map((option, index) => (
-                                                <option key={index} value={option} className="text-sm font-semibold text-gray-500 appearance-none">
+                                                'Futon Mat / variable Size',
+                                            ].map((option, optionIndex) => (
+                                                <option key={optionIndex} value={option} className="text-sm font-semibold text-gray-500 appearance-none">
                                                     {option}
                                                 </option>
                                             ))}
                                         </select>
                                         <FontAwesomeIcon icon={faCaretDown} className="text-gray-600 text-lg absolute right-4 top-0 bottom-0 my-auto cursor-pointer pointer-events-none" />
                                     </div>
-                                    {roomTypeError && <p>please enter Smoking policy</p>}
+                                    {/* Add any error handling for roomType here */}
                                 </div>
 
                                 <div className="flex flex-col gap-2 col-span-4 relative">
-
                                     <select
-                                        id="roomType"
-                                        value={noOfBeds}
+                                        id={`roomType-${index}`}
+                                        value={bed.no_of_beds}
                                         onChange={(event) => setNoOfBeds(Number(event.target.value))}
                                         className="w-full px-6 py-2 border bg-white border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none appearance-none"
                                     >
-                                        {['1', '2', '3', '4', '5'].map((option, index) => (
-                                            <option key={index} value={option} className="text-sm font-semibold text-gray-500 appearance-none">
+                                        {['1', '2', '3', '4', '5'].map((option, optionIndex) => (
+                                            <option key={optionIndex} value={option} className="text-sm font-semibold text-gray-500 appearance-none">
                                                 {option}
                                             </option>
                                         ))}
                                     </select>
                                     <FontAwesomeIcon icon={faCaretDown} className="text-gray-600 text-lg absolute right-4 top-0 bottom-0 my-auto cursor-pointer pointer-events-none" />
-                                    {roomTypeError && <p>please enter Smoking policy</p>}
+                                    {/* Add any error handling for noOfBeds here */}
                                 </div>
 
                                 <button
-                                    onClick={() => removeBed(bedType)}
-                                    className="w-full h-9 col-span-2 bg-red-500 text-sm font-semibold text-white flex items-center justify-center gap-2 hover:bg-red-700">
-
-                                    <FontAwesomeIcon icon={faPlusCircle} className="text-white text-base " />
+                                    onClick={() => removeBed(bed.bed_type)}
+                                    className="w-full h-9 col-span-2 bg-red-500 text-sm font-semibold text-white flex items-center justify-center gap-2 hover:bg-red-700"
+                                >
+                                    <FontAwesomeIcon icon={faPlusCircle} className="text-white text-base" />
                                     <span>Remove</span>
-
                                 </button>
-
                             </div>
-                        )}
+                        ))}
+
 
                         {((beds.length === 0) || addAnotherBed) && (
                             <div className="grid grid-cols-12 gap-x-8 items-end">
@@ -432,7 +426,7 @@ const AddRoomPage = () => {
                                             'Bunk bed / variable Size',
                                             'Sofa bed / variable Size',
                                             'Futon Mat / variable Size'
-                                        ].map((option, index) => (
+                                        ].filter((option) => !beds.some((bed) => bed.bed_type === option)).map((option, index) => (
                                             <option key={index} value={option} className="text-sm font-semibold text-gray-500 appearance-none">
                                                 {option}
                                             </option>
@@ -598,39 +592,39 @@ const AddRoomPage = () => {
             <FormCard label="Room Size (Optional)" >
                 {/* <div className="grid grid-cols-2 gap-x-8 px-4"> */}
 
-                    <div className="w-full grid grid-cols-3 items-end px-4">
+                <div className="w-full grid grid-cols-3 items-end px-4">
 
-                        <div className="col-span-2">
-                            <label className="text-gray-600 text-sm font-semibold">How big is the room?</label>
-                            <input
-                                type="number"
-                                value={roomSize}
-                                onChange={(e) => setRoomSize(Number(e.target.value))}
-                                className="w-full px-6 py-2 border bg-white border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none appearance-none"
-                            />
-                            {/* {nbrOfRoomsError && <p>please enter room name</p>} */}
-                        </div>
-
-                        <div className="col-span-1 relative">
-
-                            <select
-                                id="roomType"
-                                value={roomSizeUnit}
-                                onChange={(event) => setRoomSizeUnit(event.target.value)}
-                                className="w-full px-6 py-2 border bg-white border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none appearance-none"
-                            >
-                                {['Square meter', 'Squeare feet'].map((option, index) => (
-                                    <option key={index} value={option} className="text-sm font-semibold text-gray-500 appearance-none">
-                                        {option}
-                                    </option>
-                                ))}
-                            </select>
-                            <FontAwesomeIcon icon={faCaretDown} className="text-gray-600 text-lg absolute right-4 top-0 bottom-0 my-auto cursor-pointer pointer-events-none" />
-                            {/* {roomTypeError && <p>please enter Smoking policy</p>} */}
-                        </div>
-
-
+                    <div className="col-span-2">
+                        <label className="text-gray-600 text-sm font-semibold">How big is the room?</label>
+                        <input
+                            type="number"
+                            value={roomSize}
+                            onChange={(e) => setRoomSize(Number(e.target.value))}
+                            className="w-full px-6 py-2 border bg-white border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none appearance-none"
+                        />
+                        {/* {nbrOfRoomsError && <p>please enter room name</p>} */}
                     </div>
+
+                    <div className="col-span-1 relative">
+
+                        <select
+                            id="roomType"
+                            value={roomSizeUnit}
+                            onChange={(event) => setRoomSizeUnit(event.target.value)}
+                            className="w-full px-6 py-2 border bg-white border-slate-400 text-gray-600 text-sm font-semibold focus:outline-none appearance-none"
+                        >
+                            {['Square meter', 'Squeare feet'].map((option, index) => (
+                                <option key={index} value={option} className="text-sm font-semibold text-gray-500 appearance-none">
+                                    {option}
+                                </option>
+                            ))}
+                        </select>
+                        <FontAwesomeIcon icon={faCaretDown} className="text-gray-600 text-lg absolute right-4 top-0 bottom-0 my-auto cursor-pointer pointer-events-none" />
+                        {/* {roomTypeError && <p>please enter Smoking policy</p>} */}
+                    </div>
+
+
+                </div>
 
                 {/* </div> */}
             </FormCard>
@@ -691,8 +685,8 @@ const AddRoomPage = () => {
             <FormCard label="Facilities that are popular with guests">
                 <div className="px-4">
                     <div className="grid gap-6 w-full grid-flow-col grid-cols-4 grid-rows-6">
-                        {facilitiesData.map((option) => (
-                            <div key={option.data} className="flex gap-2 items-center">
+                        {facilitiesData.map((option, index) => (
+                            <div key={index} className="flex gap-2 items-center">
                                 <input
                                     type="checkbox"
                                     value={option.data}
