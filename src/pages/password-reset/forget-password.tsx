@@ -22,10 +22,11 @@ const ForgetPassword = () => {
           
             console.log(res);
           
-            setTimeout(() => {
-              router.push('/password-reset/check-mail');
-            //   setLoading(false);
-            }, 1000);
+            // router.push('/password-reset/check-mail');
+            // setTimeout(() => {
+              
+            // //   setLoading(false);
+            // }, 1000);
           } catch (error) {
                   setUserNotFoundError(true);
               console.error(error);
