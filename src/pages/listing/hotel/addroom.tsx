@@ -1,6 +1,6 @@
 import HotelTabs from "@/components/Listing/HotelTabs";
 import baseUrl from "../../../../Utils/baseUrl";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import FormCard from "@/components/Listing/FormCard";
@@ -49,7 +49,7 @@ const AddRoomPage = () => {
     const [facilities, setFacilities] = useState<any[]>([]);
     const [facilitiesError, setFacilitiesError] = useState(false);
 
-    const [images, setImages] = useState(null);
+    const [images, setImages] = useState([]);
     const [galleryImages, setGalleryImages] = useState([]);
 
     const [loading, setLoading] = useState(false);
@@ -95,6 +95,22 @@ const AddRoomPage = () => {
         { data: 'Water park', label: 'Water park' }
     ]
 
+    useEffect(() => {
+        fetchData();
+    }, [previews]);
+
+    async function fetchData() {
+        try {
+            const res = await axios.get(`${baseUrl}/hotel/${hotelId}`);
+            console.log(res.data.gallery_images)
+            const data = res.data.gallery_images
+            setGalleryImages(data)
+
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     const addBed = () => {
         setTimeout(() => {
             setBedTypeError(false);
@@ -121,13 +137,13 @@ const AddRoomPage = () => {
     };
 
     const addAnotherBedFunc = () => {
-       
+
         setAddAnotherBed(true);
     };
 
-    const  onMultipleChange = async (event: any) => {
+    const onMultipleChange = async (event: any) => {
         const input = event.target;
-        console.log(input)
+        console.log(input.files)
         if (input.files) {
             const fileList = input.files;
             setImages(fileList);
@@ -138,7 +154,7 @@ const AddRoomPage = () => {
                 formData.append('gallery_img', file);
 
                 try {
-                    const response = await axios.post(`${baseUrl}/rooms/gallery`, formData, {
+                    const response = await axios.post(`${baseUrl}/rooms/gallery/${hotelId}`, formData, {
                         headers: {
                             authorization: `Bearer ${token}`
                         }
@@ -155,8 +171,34 @@ const AddRoomPage = () => {
         }
     };
 
-    const clearGallery = (imglink: any) => {
+    const clearGallery = async (imglink: any) => {
+        console.log(imglink)
         setPreviews((prevPreviews) => prevPreviews.filter((path) => path !== imglink));
+        try {
+            const response = await axios.delete(`${baseUrl}/rooms/gallery/delete/${hotelId}`, {
+                data: { imgPath: imglink },
+            });
+
+        } catch (error) {
+            // Handle any errors that occurred during the request
+            console.error(error);
+        }
+    };
+
+    const deletephoto = async (imglink: any) => {
+        console.log(imglink)
+        setGalleryImages((prevGalleryImages) => prevGalleryImages.filter((path) => path !== imglink));
+        setPreviews((prevPreviews) => prevPreviews.filter((path) => path !== imglink));
+
+        try {
+            const response = await axios.delete(`${baseUrl}/rooms/gallery/delete/${hotelId}`, {
+                data: { imgPath: imglink },
+            });
+
+        } catch (error) {
+            // Handle any errors that occurred during the request
+            console.error(error);
+        }
     };
 
     const addRoom = async () => {
@@ -239,7 +281,7 @@ const AddRoomPage = () => {
         }
 
     };
-    console.log(beds)
+
     return (
         <section className="md:container mx-auto px-10 py-16 flex flex-col gap-8 text-black font-montserrat">
             <h2 className="text-2xl font-semibold mb-6">
@@ -709,7 +751,7 @@ const AddRoomPage = () => {
                     </h4>
 
                     <div className="w-full border rounded-lg border-slate-500 border-dashed">
-                        {!images ? (
+                        {images.length === 0 ? (
                             <div className="w-full h-full py-24 flex flex-col items-center gap-8">
                                 <div className="w-32 h-32">
                                     <Image
@@ -743,6 +785,7 @@ const AddRoomPage = () => {
                                     onChange={onMultipleChange}
                                     accept="image/*"
                                     ref={inputRef}
+                                    multiple
                                 />
                             </div>
                         ) : (
@@ -770,29 +813,64 @@ const AddRoomPage = () => {
                                     </div>
                                 ))}
 
-                                <div className="w-full aspect-square grid place-items-center">
-                                    <label
-                                        htmlFor="gallery-img"
-                                        className="py-3 px-4 text-blue-500 text-sm font-semibold rounded-lg border border-blue-500 cursor-pointer"
-                                    >
-                                        <FontAwesomeIcon icon={faCamera} className="text-blue-500 text-base" />
-                                        Add more
-                                    </label>
+                                {galleryImages.length < 31 && (
+                                    <div className="w-full aspect-square grid place-items-center">
+                                        <label
+                                            htmlFor="gallery-img"
+                                            className="py-3 px-4 text-blue-500 text-sm font-semibold rounded-lg border border-blue-500 cursor-pointer"
+                                        >
+                                            <FontAwesomeIcon icon={faCamera} className="text-blue-500 text-base mr-2" />
+                                            Add more
+                                        </label>
 
-                                    <input
-                                        className="hidden"
-                                        id="gallery-img"
-                                        type="file"
-                                        onChange={onMultipleChange}
-                                        accept="image/*"
-                                        ref={inputRef}
-                                    />
-                                </div>
+                                        <input
+                                            className="hidden"
+                                            id="gallery-img"
+                                            type="file"
+                                            onChange={onMultipleChange}
+                                            accept="image/*"
+                                            ref={inputRef}
+                                            multiple
+                                        />
+                                    </div>
+                                )}
+
                             </div>
                         )}
                     </div>
                 </div>
             </FormCard>
+
+            <FormCard label="All the Photos of a Hotel">
+                <div className="px-4 flex flex-col gap-6">
+                    {/* <h4 className="text-sm font-semibold text-gray-600">
+                        Add at least 3 photos now. You can always add more later.
+                    </h4> */}
+
+                    <div className="w-full grid grid-cols-6 bg-slate-300">
+                                {galleryImages.map((preview: any, index: number) => (
+                                    <div key={index} className="w-full aspect-square relative border">
+                                        <Image
+                                            src={preview}
+                                            alt="item1"
+                                            className="w-full h-full object-contain bg-white"
+                                            width={450}
+                                            height={400}
+                                        />
+                                        <button
+                                            onClick={() => deletephoto(preview)}
+                                            className="w-8 h-8 rounded-full bg-red-500 absolute top-2 right-2"
+                                        >
+                                            <FontAwesomeIcon icon={faTrash} className="text-white text-sm" />
+                                        </button>
+                                    </div>
+                                ))}
+         
+                            </div>
+                </div>
+            </FormCard>
+
+            
 
             <button onClick={addRoom} className="w-full py-4 bg-blue-700 text-white font-semibold text-base rounded-lg hover:bg-blue-900">
                 {/* <SharedButtonSpinner v-if="loading"/> */}

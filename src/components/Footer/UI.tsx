@@ -11,8 +11,8 @@ interface UIProps {
 const UI: React.FC<UIProps> = ({ data }) => {
   return (
     <ul className="text-sm font-normal flex flex-col gap-3">
-      {data.map((link) => (
-        <li key={link.title}>
+      {data.map((link, index) => (
+        <li key={index}>
           <Link href={link.path}>
             {link.title}
           </Link>
