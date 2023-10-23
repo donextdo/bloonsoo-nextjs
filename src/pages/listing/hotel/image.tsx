@@ -1,7 +1,7 @@
 import HotelTabs from "@/components/Listing/HotelTabs";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import baseUrl from "../../../../Utils/baseUrl";
 import FormCard from "@/components/Listing/FormCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,9 +13,11 @@ const ImagePage = () => {
     const [image, setImage] = useState(null);
     const [imageValue, setImageValue] = useState('');
     const [preview, setPreview] = useState('');
-    const [images, setImages] = useState(null);
+    const [images, setImages] = useState([]);
     const [previews, setPreviews] = useState<any[]>([]);
     const router = useRouter();
+    const [galleryImages, setGalleryImages] = useState([]);
+
 
     const { hotelId } = router.query;
 
@@ -26,6 +28,22 @@ const ImagePage = () => {
     }
 
     const inputRef = useRef(null);
+
+    useEffect(() => {
+        fetchData();
+    }, [previews]);
+
+    async function fetchData() {
+        try {
+            const res = await axios.get(`${baseUrl}/hotel/${hotelId}`);
+            console.log(res.data.gallery_images)
+            const data = res.data.gallery_images
+            setGalleryImages(data)
+
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     const onChange = async (event: any) => {
         const input = event.target;
@@ -63,7 +81,7 @@ const ImagePage = () => {
 
     const onMultipleChange = async (event: any) => {
         const input = event.target;
-        console.log(input)
+        console.log(input.files)
         if (input.files) {
             const fileList = input.files;
             setImages(fileList);
@@ -92,8 +110,17 @@ const ImagePage = () => {
     };
 
 
-    const clearGallery = (imglink: any) => {
+    const clearGallery = async (imglink: any) => {
         setPreviews((prevPreviews) => prevPreviews.filter((path) => path !== imglink));
+        try {
+            const response = await axios.delete(`${baseUrl}/rooms/gallery/delete/${hotelId}`, {
+                data: { imgPath: imglink },
+            });
+
+        } catch (error) {
+            // Handle any errors that occurred during the request
+            console.error(error);
+        }
     };
 
     const postNext = () => {
@@ -109,6 +136,23 @@ const ImagePage = () => {
     const clear = () => {
         setImage(null)
     }
+
+    const deletephoto = async (imglink: any) => {
+        console.log(imglink)
+        setGalleryImages((prevGalleryImages) => prevGalleryImages.filter((path) => path !== imglink));
+        setPreviews((prevPreviews) => prevPreviews.filter((path) => path !== imglink));
+
+        try {
+            const response = await axios.delete(`${baseUrl}/rooms/gallery/delete/${hotelId}`, {
+                data: { imgPath: imglink },
+            });
+
+        } catch (error) {
+            // Handle any errors that occurred during the request
+            console.error(error);
+        }
+    };
+
     return (
         <section className="md:container mx-auto px-10 py-16 flex flex-col gap-8 text-black font-montserrat">
 
@@ -199,7 +243,7 @@ const ImagePage = () => {
                     </h4>
 
                     <div className="w-full border rounded-lg border-slate-500 border-dashed">
-                        {!images ? (
+                        {images.length === 0 ? (
                             <div className="w-full h-full py-24 flex flex-col items-center gap-8">
                                 <div className="w-32 h-32">
                                     <Image
@@ -233,6 +277,7 @@ const ImagePage = () => {
                                     onChange={onMultipleChange}
                                     accept="image/*"
                                     ref={inputRef}
+                                    multiple 
                                 />
                             </div>
                         ) : (
@@ -256,7 +301,7 @@ const ImagePage = () => {
                                             onClick={() => clearGallery(preview)}
                                             className="w-8 h-8 rounded-full bg-red-500 absolute top-2 right-2"
                                         >
-                                            <FontAwesomeIcon icon={faTrash} className="text-white text-sm" />
+                                            <FontAwesomeIcon icon={faTrash} className="text-white text-sm mr-2" />
                                         </button>
                                     </div>
                                 ))}
@@ -266,7 +311,7 @@ const ImagePage = () => {
                                         htmlFor="gallery-img"
                                         className="py-3 px-4 text-blue-500 text-sm font-semibold rounded-lg border border-blue-500 cursor-pointer"
                                     >
-                                        <FontAwesomeIcon icon={faCamera} className="text-blue-500 text-base" />
+                                        <FontAwesomeIcon icon={faCamera} className="text-blue-500 text-base mr-2" />
                                         Add more
                                     </label>
 
@@ -277,6 +322,7 @@ const ImagePage = () => {
                                         onChange={onMultipleChange}
                                         accept="image/*"
                                         ref={inputRef}
+                                        multiple 
                                     />
                                 </div>
                             </div>
@@ -285,6 +331,36 @@ const ImagePage = () => {
                 </div>
 
             </FormCard>
+
+            <FormCard label="All the Photos of a Hotel">
+                <div className="px-4 flex flex-col gap-6">
+                    {/* <h4 className="text-sm font-semibold text-gray-600">
+                        Add at least 3 photos now. You can always add more later.
+                    </h4> */}
+
+                    <div className="w-full grid grid-cols-6 bg-slate-300">
+                                {galleryImages.map((preview: any, index: number) => (
+                                    <div key={index} className="w-full aspect-square relative border">
+                                        <Image
+                                            src={preview}
+                                            alt="item1"
+                                            className="w-full h-full object-contain bg-white"
+                                            width={450}
+                                            height={400}
+                                        />
+                                        <button
+                                            onClick={() => deletephoto(preview)}
+                                            className="w-8 h-8 rounded-full bg-red-500 absolute top-2 right-2"
+                                        >
+                                            <FontAwesomeIcon icon={faTrash} className="text-white text-sm" />
+                                        </button>
+                                    </div>
+                                ))}
+         
+                            </div>
+                </div>
+            </FormCard>
+
 
             <button onClick={postNext} className="w-full py-4 bg-blue-700 text-white font-semibold text-base rounded-lg hover:bg-blue-900">
                 Next
