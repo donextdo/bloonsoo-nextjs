@@ -838,6 +838,8 @@ const AddRoomPage = () => {
                             </div>
                         )}
                     </div>
+                     
+                     <h6 className="text-gray-400">* Please consider that the total number of photos can be added for all sections will be 30.</h6>
                 </div>
             </FormCard>
 

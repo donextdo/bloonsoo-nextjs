@@ -277,7 +277,7 @@ const ImagePage = () => {
                                     onChange={onMultipleChange}
                                     accept="image/*"
                                     ref={inputRef}
-                                    multiple 
+                                    multiple
                                 />
                             </div>
                         ) : (
@@ -306,28 +306,33 @@ const ImagePage = () => {
                                     </div>
                                 ))}
 
-                                <div className="w-full aspect-square grid place-items-center">
-                                    <label
-                                        htmlFor="gallery-img"
-                                        className="py-3 px-4 text-blue-500 text-sm font-semibold rounded-lg border border-blue-500 cursor-pointer"
-                                    >
-                                        <FontAwesomeIcon icon={faCamera} className="text-blue-500 text-base mr-2" />
-                                        Add more
-                                    </label>
+                                {galleryImages.length < 31 && (
+                                    <div className="w-full aspect-square grid place-items-center">
+                                        <label
+                                            htmlFor="gallery-img"
+                                            className="py-3 px-4 text-blue-500 text-sm font-semibold rounded-lg border border-blue-500 cursor-pointer"
+                                        >
+                                            <FontAwesomeIcon icon={faCamera} className="text-blue-500 text-base mr-2" />
+                                            Add more
+                                        </label>
 
-                                    <input
-                                        className="hidden"
-                                        id="gallery-img"
-                                        type="file"
-                                        onChange={onMultipleChange}
-                                        accept="image/*"
-                                        ref={inputRef}
-                                        multiple 
-                                    />
-                                </div>
+                                        <input
+                                            className="hidden"
+                                            id="gallery-img"
+                                            type="file"
+                                            onChange={onMultipleChange}
+                                            accept="image/*"
+                                            ref={inputRef}
+                                            multiple
+                                        />
+                                    </div>
+                                )}
                             </div>
                         )}
                     </div>
+
+                    <h6 className="text-gray-400">* Please consider that the total number of photos can be added for all sections will be 30.</h6>
+
                 </div>
 
             </FormCard>
@@ -339,25 +344,25 @@ const ImagePage = () => {
                     </h4> */}
 
                     <div className="w-full grid grid-cols-6 bg-slate-300">
-                                {galleryImages.map((preview: any, index: number) => (
-                                    <div key={index} className="w-full aspect-square relative border">
-                                        <Image
-                                            src={preview}
-                                            alt="item1"
-                                            className="w-full h-full object-contain bg-white"
-                                            width={450}
-                                            height={400}
-                                        />
-                                        <button
-                                            onClick={() => deletephoto(preview)}
-                                            className="w-8 h-8 rounded-full bg-red-500 absolute top-2 right-2"
-                                        >
-                                            <FontAwesomeIcon icon={faTrash} className="text-white text-sm" />
-                                        </button>
-                                    </div>
-                                ))}
-         
+                        {galleryImages.map((preview: any, index: number) => (
+                            <div key={index} className="w-full aspect-square relative border">
+                                <Image
+                                    src={preview}
+                                    alt="item1"
+                                    className="w-full h-full object-contain bg-white"
+                                    width={450}
+                                    height={400}
+                                />
+                                <button
+                                    onClick={() => deletephoto(preview)}
+                                    className="w-8 h-8 rounded-full bg-red-500 absolute top-2 right-2"
+                                >
+                                    <FontAwesomeIcon icon={faTrash} className="text-white text-sm" />
+                                </button>
                             </div>
+                        ))}
+
+                    </div>
                 </div>
             </FormCard>
 
